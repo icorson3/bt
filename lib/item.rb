@@ -1,3 +1,4 @@
+require 'pry'
 class Item
   attr_reader :id, :name, :description, :unit_price, :created_at, :updated_at, :merchant_id
 
@@ -10,6 +11,10 @@ class Item
     @updated_at = item_hash[:updated_at]
     @merchant_id = item_hash[:merchant_id]
     # @item_array = item_array
+  end
+
+  def unit_price_to_dollars(unit_price)
+    (unit_price.to_f)/100
   end
 
 

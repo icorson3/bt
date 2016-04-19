@@ -28,7 +28,11 @@ attr_reader :i
   end
 
   def test_unit_price_provides_price_of_item
-    assert BigDecimal.new(10.99,4), i.unit_price
+    assert_equal BigDecimal.new(10.99,4), i.unit_price
+  end
+
+  def test_unit_price_class_big_decimal
+    assert_kind_of BigDecimal, i.unit_price
   end
 
   def test_created_at_returns_created_time
@@ -39,4 +43,7 @@ attr_reader :i
     assert Time.now, i.updated_at
   end
 
+  def test_unit_price_converts_to_dollars
+    assert_equal 12.00, i.unit_price_to_dollars(1200)
+  end
 end

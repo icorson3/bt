@@ -2,7 +2,7 @@ require 'csv'
 require './lib/item_repo'
 
 class SalesEngine
-attr_accessor :item_repository, :items
+attr_accessor :item_repository
 
   def initialize(items_file)
     @item_repository = ItemRepo.new(self)
@@ -14,7 +14,7 @@ attr_accessor :item_repository, :items
   end
 
   def self.from_csv(all_files)
-    SalesEngine.new(all_files[:items])
+    SalesEngine.new(all_files[:items],all_files[:merchants])
   #                   # all_files[:merchants])
   end
 #passing in hash to create an object with that hash. If wanted to do additional logic, create ItemRepo & MerchantRepo in from_csv
