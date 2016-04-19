@@ -8,18 +8,17 @@ class SalesEngineTest < Minitest::Test
   def setup
     @se = SalesEngine.from_csv({
       :items     => "./data/items.csv",
-      :merchants => "./data/merchants.csv",
+      :merchants => "./data/merchants.csv"
       })
   end
 
   def test_sales_engine_class_exists
-    assert SalesEngine, se.class
+
   end
 
   def test_sales_engine_csv_files_exist
-    require "pry"; binding.pry
 
-    assert_equal ({:items=>"./data/items.csv", :merchants=>"./data/merchants.csv"}), se.csv_files
+    assert_equal ({:items=>"./data/items.csv", :merchants=>"./data/merchants.csv"}), se.csv_files(se)
   end
 
   # def test_can_take_in_the_csvs
