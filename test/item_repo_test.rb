@@ -23,19 +23,24 @@ class ItemRepoTest < Minitest::Test
   end
 
   def test_can_find_by_id
-    assert_equal "510+ RealPush Icon Set", ir.find_by_id("263395237").name
+    assert_equal "510+ RealPush Icon Set", ir.find_by_id(263395237).name
   end
 
-  def test_returns_nil_by_id
-    assert_equal nil, ir.find_by_id(nil)
-  end
+  # def test_returns_nil_by_id
+  #   assert_equal nil, ir.find_by_id(nil)
+  # end
+  #
+  # def test_finds_nil_by_name
+  #   assert_equal nil, ir.find_by_name(nil)
+  # end
 
   def test_can_find_by_name
-    assert_equal "263395237", ir.find_by_name("510+ RealPush Icon Set").id
+    assert_equal 263395237, ir.find_by_name("510+ RealPush Icon Set").id
   end
 
+
   def test_find_all_with_description_returns_array
-    assert_equal "263453001",ir.find_all_with_description("Coffee Mug Holder, Wall Decor")[0].id
+    assert_equal 263453001,ir.find_all_with_description("Coffee Mug Holder, Wall Decor")[0].id
   end
 
   def test_find_all_with_description_returns_items_with_price
@@ -47,10 +52,14 @@ class ItemRepoTest < Minitest::Test
   end
 
   def test_finds_all_from_user_id
-    assert_equal 1, ir.find_all_by_merchant_id('12335009').count
+    assert_equal 1, ir.find_all_by_merchant_id(12335009).count
   end
 
-  
+  # def test_find_all_with_description_returns_empty_array
+  #   assert_equal [],ir.find_all_with_description(nil)
+  # end
+
+
   #
   # def test_cannot_find_nil_name
   #   assert_equal nil, ir.find_by_name(nil)

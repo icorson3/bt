@@ -41,13 +41,13 @@ class ItemRepo
   def parse_data(contents)
     contents.each do |row|
       data = []
-      data << row[:id]
+      data << row[:id].to_i
       data << row[:name]
       data << row[:description]
       data << row[:unit_price].to_i
       data << row[:created_at]
       data << row[:updated_at]
-      data << row[:merchant_id]
+      data << row[:merchant_id].to_i
       create_item_object(data)
     end
   end
