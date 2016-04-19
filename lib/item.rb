@@ -7,6 +7,8 @@ class Item
     @unit_price = item_hash[:unit_price]
     @created_at = item_hash[:created_at]
     @updated_at = item_hash[:updated_at]
-
+    # @item_array = item_array
   end
+
+  
 end

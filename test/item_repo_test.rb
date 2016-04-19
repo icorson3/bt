@@ -2,24 +2,25 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/item_repo'
 require './lib/sales_engine'
+require 'pry'
 
 class ItemRepoTest < Minitest::Test
-  attr_reader :item_repo
+  attr_reader :ir
   def setup
     @se = SalesEngine.from_csv({
-      :items     => "./data/items.csv"
+      :items => "./data/items.csv"
       # :merchants => "./data/merchants.csv"
       })
-    @item_repo = ItemRepo.new(self)
+    @ir = @se.item_repository
   end
 
   def test_item_repo_class_exists
-    assert_equal ItemRepo, item_repo.class
+    assert_equal ItemRepo, ir.class
   end
 
   def test_case_name
-    assert_equal "", item_repo.all
-  end
+    assert_equal "510+ RealPush Icon Set", ir.all[0].name
+  end 
 
   # def test_csv_loads_names
   #   assert_equal "510+ RealPush Icon Set", item_repo.load_csv()[0]

@@ -1,6 +1,6 @@
 require './lib/item'
 require 'csv'
-# require './lib/sales_engine'
+require './lib/sales_engine'
 
 class ItemRepo
 attr_accessor :item_file, :item_array, :data
@@ -22,8 +22,8 @@ attr_accessor :item_file, :item_array, :data
   def load_csv(item_file)
     if item_array.empty?
       contents = CSV.read './data/items.csv', headers: true, header_converters: :symbol
+      parse_data(contents)
     end
-    parse_data(contents)
   end
 
   def create_item_object(data)
