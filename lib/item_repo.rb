@@ -3,7 +3,7 @@ require 'csv'
 require './lib/sales_engine'
 
 class ItemRepo
-  attr_accessor :item_array, :data
+  attr_accessor :item_array
   def initialize(sales_engine)
     # (sales_engine)
     @sales_engine = sales_engine
@@ -11,14 +11,6 @@ class ItemRepo
     # @data = []# @item = Item.new    # sales_engine.item_repository
   end
 
-  # def load_csv(item_file)
-  #   require "pry"; binding.pry
-  #   if items_file.empty?
-  #     contents = CSV.read(items_file)
-  #     # headers: true, header_converters: :symbol
-  #     parse_data(contents)
-  # end
-  # end
   def load_csv(item_file)
     if item_array.empty?
       contents = CSV.read item_file, headers: true, header_converters: :symbol
@@ -57,40 +49,26 @@ class ItemRepo
   end
   #
   def find_by_id(id)
-    if item_array.empty?
-      nil
-    else item_array.find do |item|
+    item_array.find do |item|
       item.id == id
-      end
     end
   end
 
   def find_by_name(name)
-    if item_array.empty?
-      return nil
-    else item_array.find do |item|
-      item.name.downcase == name.downcase
-      end
+    item_array.find do |item|
+    item.name.downcase == name.downcase
     end
   end
 
   def find_all_with_description(description)
-    if item_array.empty?
-      item_array
-    else
-      item_array.find_all do |item|
-        item.description.downcase == description.downcase
-      end
+    item_array.find_all do |item|
+      item.description.downcase == description.downcase
     end
   end
 
   def find_all_by_price(unit_price)
-    if item_array.empty?
-      item_array
-    else
-      item_array.find_all do |item|
-        item.unit_price == unit_price
-      end
+    item_array.find_all do |item|
+      item.unit_price == unit_price
     end
   end
 
