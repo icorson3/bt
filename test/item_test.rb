@@ -2,17 +2,21 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/item'
 require 'bigdecimal'
-
+require './lib/sales_engine'
 class ItemTest < Minitest::Test
-attr_reader :i
+attr_reader :i, :se
   def setup
+    @se = SalesEngine.from_csv({
+      :items => "./data/items.csv",
+      :merchants => "./data/merchants.csv"
+      })
     @i = Item.new({
   :name        => "Pencil",
   :description => "You can use it to write things",
   :unit_price  => BigDecimal.new(10.99,4),
   :created_at  => Time.now,
   :updated_at  => Time.now,
-  })
+  }, self)
   end
 
   def test_item_class_exists
@@ -45,5 +49,10 @@ attr_reader :i
 
   def test_unit_price_converts_to_dollars
     assert_equal 12.00, i.unit_price_to_dollars(1200)
+  end
+
+  def test_merchant_returns_correct_merchant
+    sample_item = se.items.find_by_id(263395721)
+    assert_equal "Madewithgitterxx", sample_item.merchant.name
   end
 end

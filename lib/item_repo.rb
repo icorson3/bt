@@ -5,7 +5,7 @@ require 'time'
 require 'bigdecimal'
 
 class ItemRepo
-  attr_accessor :item_array
+  attr_accessor :item_array, :sales_engine
   def initialize(sales_engine)
     @sales_engine = sales_engine
     @item_array = []

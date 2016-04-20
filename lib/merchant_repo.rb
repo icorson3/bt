@@ -3,7 +3,7 @@ require 'csv'
 require_relative 'sales_engine'
 
 class MerchantRepo
-  attr_accessor :merchant_array
+  attr_accessor :merchant_array, :sales_engine
 
   def initialize(sales_engine)
     @sales_engine = sales_engine
@@ -27,10 +27,10 @@ class MerchantRepo
   end
 
   def create_merchant_object(data)
-    @merchant_array <<Merchant.new({
+    @merchant_array << Merchant.new({
       id: data[0],
       name: data[1]
-      },self)
+      }, self)
     end
 
   def all
@@ -54,4 +54,5 @@ class MerchantRepo
       merchant.name.downcase.include?(name.downcase)
     end
   end
+
 end
