@@ -17,7 +17,11 @@ attr_reader :se, :sa
     assert_equal 2.88, sa.average_items_per_merchant
   end
 
-  def test_case_name
-    
+  def test_average_item_price_per_merchant
+    assert_equal BigDecimal, sa.average_item_price_for_merchant(12334105).class
+  end
+
+  def test_average_average_price_per_merchant
+    assert_equal BigDecimal, sa.average_average_price_for_merchant
   end
 end
