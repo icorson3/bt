@@ -1,20 +1,34 @@
-require './lib/item'
+require_relative 'item'
+require_relative 'sales_engine'
 require 'csv'
-require './lib/sales_engine'
+require 'time'
+require 'bigdecimal'
 
 class ItemRepo
   attr_accessor :item_array
   def initialize(sales_engine)
-    # (sales_engine)
     @sales_engine = sales_engine
     @item_array = []
-    # @data = []# @item = Item.new    # sales_engine.item_repository
   end
 
   def load_csv(item_file)
     if item_array.empty?
       contents = CSV.read item_file, headers: true, header_converters: :symbol
       parse_data(contents)
+    end
+  end
+
+  def parse_data(contents)
+    contents.each do |row|
+      data = []
+      data << row[:id].to_i
+      data << row[:name]
+      data << row[:description]
+      data << BigDecimal.new(row[:unit_price].to_i)/BigDecimal.new(100)
+      data << Time.parse(row[:created_at])
+      data << Time.parse(row[:updated_at])
+      data << row[:merchant_id].to_i
+      create_item_object(data)
     end
   end
 
@@ -30,19 +44,6 @@ class ItemRepo
       }, self)
   end
 
-  def parse_data(contents)
-    contents.each do |row|
-      data = []
-      data << row[:id].to_i
-      data << row[:name]
-      data << row[:description]
-      data << row[:unit_price].to_i
-      data << row[:created_at]
-      data << row[:updated_at]
-      data << row[:merchant_id].to_i
-      create_item_object(data)
-    end
-  end
 
   def all
     item_array

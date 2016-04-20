@@ -1,6 +1,6 @@
-require './lib/merchant'
+require_relative 'merchant'
 require 'csv'
-require './lib/sales_engine'
+require_relative 'sales_engine'
 
 class MerchantRepo
   attr_accessor :merchant_array
@@ -17,13 +17,6 @@ class MerchantRepo
     end
   end
 
-  def create_merchant_object(data)
-    @merchant_array <<Merchant.new({
-      id: data[0],
-      name: data[1]
-      },self)
-  end
-
   def parse_data(contents)
     contents.each do |row|
       data = []
@@ -32,6 +25,13 @@ class MerchantRepo
       create_merchant_object(data)
     end
   end
+
+  def create_merchant_object(data)
+    @merchant_array <<Merchant.new({
+      id: data[0],
+      name: data[1]
+      },self)
+    end
 
   def all
     merchant_array
@@ -50,11 +50,8 @@ class MerchantRepo
   end
 
   def find_all_by_name(name)
-
     merchant_array.find_all do |merchant|
       merchant.name.downcase.include?(name.downcase)
     end
   end
-
-
 end
