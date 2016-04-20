@@ -1,7 +1,6 @@
 require_relative 'item_repo'
 require_relative 'merchant_repo'
 require_relative 'sales_analyst'
-require 'spec_helper'
 require 'csv'
 
 

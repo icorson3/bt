@@ -61,9 +61,9 @@ class ItemRepo
     end
   end
 
-  def find_all_with_description(description)
+  def find_all_with_description(phrase)
     item_array.find_all do |item|
-      item.description.downcase == description.downcase
+      item.description.downcase == phrase.downcase
     end
   end
 
