@@ -47,14 +47,6 @@ class InvoiceRepoTest < Minitest::Test
     assert_equal 4985, i.invoice_count
   end
 
-  # def test_days_of_the_week
-  #   assert_equal "", i.days_of_week
-  # end
-
-  # def test_days_of_week_grouped
-  #   assert_equal "", i.days_of_week_grouped
-  # end
-
   def test_days_of_week_finds_number_of_each_days_invoices
     assert_equal ({"Saturday"=>729, "Friday"=>701, "Wednesday"=>741, "Monday"=>696, "Sunday"=>708, "Tuesday"=>692, "Thursday"=>718}), i.days_of_week_quantities
   end

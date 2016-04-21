@@ -24,7 +24,7 @@ class InvoiceRepo
       data << row[:id].to_i
       data << row[:customer_id].to_i
       data << row[:merchant_id].to_i
-      data << row[:status]
+      data << row[:status].to_sym
       data << Time.parse(row[:created_at])
       data << Time.parse(row[:updated_at])
       create_item_object(data)
