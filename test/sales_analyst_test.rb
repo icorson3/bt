@@ -8,7 +8,8 @@ attr_reader :se, :sa
   def setup
     @se = SalesEngine.from_csv({
       :items => "./data/items.csv",
-      :merchants => "./data/merchants.csv"
+      :merchants => "./data/merchants.csv",
+      :invoices => './data/invoices.csv'
       })
     @sa = SalesAnalyst.new(se)
   end
@@ -26,7 +27,7 @@ attr_reader :se, :sa
   end
 
   def test_average_average_price_per_merchant
-    assert_equal BigDecimal, sa.average_average_price_for_merchant.class
+    assert_equal BigDecimal, sa.average_average_price_per_merchant.class
   end
 
   def test_standard_deviation_works_for_items_per_merchant
@@ -38,8 +39,36 @@ attr_reader :se, :sa
   end
 
   def test_highest_priced_items_returned_from_golden_items
-    assert_equal 38, sa.golden_items.count
-    assert_equal "Solid American Black Walnut Trestle Table", sa.golden_items[37].name
+    assert_equal 5, sa.golden_items.count
   end
 
+  def test_average_invoices_per_merchant_works
+    assert_equal 10.49, sa.average_invoices_per_merchant
+  end
+
+  def test_average_invoices_per_merchant_standard_deviation
+    assert_equal 3.29, sa.average_invoices_per_merchant_standard_deviation
+  end
+
+  def test_top_merchants_by_invoice_count
+    assert_equal 12, sa.top_merchants_by_invoice_count.count
+  end
+
+  def test_bottom_merchants_by_invoice_count
+    assert_equal 4, sa.bottom_merchants_by_invoice_count.count
+  end
+
+  def test_days_of_week_standard_deviation
+    assert_equal 18.07, sa.invoice_days_of_week_standard_deviation
+  end
+
+  def test_top_days_by_invoice_count
+    assert_equal "Wednesday", sa.top_days_by_invoice_count
+  end
+
+  def test_invoice_status
+    assert_equal 29.55, sa.invoice_status("pending")
+    assert_equal 56.95, sa.invoice_status("shipped")
+    assert_equal 13.5, sa.invoice_status("returned")
+  end
 end

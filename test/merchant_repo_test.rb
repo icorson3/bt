@@ -9,7 +9,8 @@ class MerchantRepoTest < Minitest::Test
   def setup
     @se = SalesEngine.from_csv({
       :items => "./data/items.csv",
-      :merchants => "./data/merchants.csv"
+      :merchants => "./data/merchants.csv",
+      :invoices => "./data/invoices.csv"
       })
     @mr = @se.merchants
   end
@@ -42,5 +43,8 @@ class MerchantRepoTest < Minitest::Test
     assert_equal 7, mr.find_all_by_name("love").count
   end
 
+  def test_can_count_merchants
+    assert_equal 475, mr.merchant_count
+  end
 
 end
