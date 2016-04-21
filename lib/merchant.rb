@@ -6,8 +6,9 @@ attr_reader :id, :name, :merchant_array
     @merchant_array = merchant_array
   end
 
+
   def items
-    merchant_array.sales_engine.items.find_all_by_merchant_id(id)
+    merchant_array.find_items_by_merchant_id(self.id)
   end
 
 

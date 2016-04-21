@@ -1,5 +1,5 @@
-require_relative 'item'
 require_relative 'sales_engine'
+require_relative 'item'
 require 'csv'
 require 'time'
 require 'bigdecimal'
@@ -82,6 +82,10 @@ class ItemRepo
       end
     end
   end
+
+  def find_merchant_by_merchant_id(merchant_id)
+      sales_engine.find_merchant_by_merchant_id(merchant_id)
+    end
 
   def find_all_by_merchant_id(merchant_id)
     if item_array.empty?

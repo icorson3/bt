@@ -1,6 +1,6 @@
+require_relative 'sales_engine'
 require_relative 'merchant'
 require 'csv'
-require_relative 'sales_engine'
 
 class MerchantRepo
   attr_accessor :merchant_array, :sales_engine
@@ -35,6 +35,9 @@ class MerchantRepo
 
   def all
     merchant_array
+  end
+def find_items_by_merchant_id(id)
+  sales_engine.find_items_by_merchant_id(id)
   end
 
   def find_by_id(id)

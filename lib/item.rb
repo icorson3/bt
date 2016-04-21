@@ -18,7 +18,7 @@ class Item
   end
 
   def merchant
-    item_array.sales_engine.merchants.find_by_id(merchant_id)
+    item_array.find_merchant_by_merchant_id(self.merchant_id)
   end
 
 end

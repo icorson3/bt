@@ -1,3 +1,5 @@
+require_relative 'sales_engine'
+
 class SalesAnalyst
 
   attr_reader :sales_engine
@@ -7,6 +9,8 @@ class SalesAnalyst
 
   def average_items_per_merchant
     (sales_engine.items.item_array.count.to_f/sales_engine.merchants.merchant_array.count.to_f).round(2)
+    #sales engine should have method that will grab number of items in it.
+    #items should have method that returns count within item
   end
 
   def average_items_per_merchant_standard_deviation
