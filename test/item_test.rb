@@ -8,7 +8,8 @@ attr_reader :i, :se
   def setup
     @se = SalesEngine.from_csv({
       :items => "./data/items.csv",
-      :merchants => "./data/merchants.csv"
+      :merchants => "./data/merchants.csv",
+      :invoices => "./data/invoices.csv"
       })
     @i = Item.new({
   :name        => "Pencil",
