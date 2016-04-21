@@ -109,5 +109,35 @@ class SalesAnalyst
     end
   end
 
-  
+  def invoice_days_of_week_standard_deviation
+    mean = sales_engine.invoice_days_of_week_mean
+    incidences = sales_engine.invoice_days_of_week_incidences
+    sample_variance = incidences.inject(0) do |total,incidence|
+        total + ((incidence - mean) ** 2)
+      end/(incidences.length - 1).to_f
+
+      standard_deviation(sample_variance)
+  end
+
+  def top_days_by_invoice_count
+    mean = sales_engine.invoice_days_of_week_mean
+    high_day_invoice_count = invoice_days_of_week_standard_deviation + mean
+    hash = sales_engine.days_of_week_quantities
+    hash.each do |key, value|
+      if value > high_day_invoice_count
+        return key
+      end
+
+    end
+  end
+
+  def invoice_status(status)
+    (((sales_engine.invoice_status(status).to_f)/(sales_engine.invoice_count.to_f)) * 100).round(2)
+  end
 end
+
+    #create an array converting each created at into day of the week then count the instance that each day appears
+    #day of week count
+    #find the mean number of invoices per day of week
+    #find standard_deviation of the data set
+    #

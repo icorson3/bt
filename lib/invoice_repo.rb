@@ -77,4 +77,37 @@ class InvoiceRepo
   def invoice_count
     all.count
   end
+
+  def days_of_week
+    invoice_array.map do |invoice|
+      invoice.created_at.strftime('%A')
+    end
+  end
+
+  def days_of_week_grouped
+    days_of_week.group_by do |day|
+      day
+    end
+  end
+
+  def days_of_week_quantities
+    result_hash = {}
+    days_of_week_grouped.each do |key,value|
+      result_hash[key] = value.count
+    end
+    result_hash
+  end
+
+  def days_of_week_incidences
+    days_of_week_quantities.values
+  end
+
+  def days_of_week_mean
+    invoice_days = days_of_week_quantities.values
+    total_sum = invoice_days.inject(0) do |total,incidences|
+     total + incidences
+    end
+    total_sum / 7
+  end
+
 end

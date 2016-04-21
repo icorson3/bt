@@ -51,7 +51,7 @@ attr_accessor :items, :merchants, :invoices
   def invoice_count
     invoices.invoice_count
   end
-  
+
   def merchant_repository
     merchants.merchant_array
   end
@@ -64,6 +64,21 @@ attr_accessor :items, :merchants, :invoices
     invoices.invoice_array
   end
 
+  def invoice_days_of_week_mean
+    invoices.days_of_week_mean
+  end
+
+  def days_of_week_quantities
+    invoices.days_of_week_quantities
+  end
+
+  def invoice_days_of_week_incidences
+    invoices.days_of_week_incidences
+  end
+
+  def invoice_status(status)
+    invoices.find_all_by_status(status).count
+  end
 
 #passing in hash to create an object with that hash. If wanted to do additional logic, create ItemRepo & MerchantRepo in from_csv
 end
