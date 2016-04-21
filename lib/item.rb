@@ -1,8 +1,8 @@
 require 'pry'
 class Item
-  attr_reader :id, :name, :description, :unit_price, :created_at, :updated_at, :merchant_id
+  attr_reader :id, :name, :description, :unit_price, :created_at, :updated_at, :merchant_id, :item_array
 
-  def initialize(item_hash, item_array)
+  def initialize(item_hash, item_array = nil)
     @id = item_hash[:id]
     @name = item_hash[:name]
     @description = item_hash[:description]
@@ -17,5 +17,8 @@ class Item
     (unit_price.to_f)/100
   end
 
+  def merchant
+    item_array.find_merchant_by_merchant_id(self.merchant_id)
+  end
 
 end

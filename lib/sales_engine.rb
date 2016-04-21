@@ -13,7 +13,7 @@ attr_accessor :items, :merchants
     csv_files(items_file, merchant_file)
 
   end
-
+#add method to items
   def csv_files(items_file, merchant_file)
     items.load_csv(items_file)
     merchants.load_csv(merchant_file)
@@ -24,6 +24,13 @@ attr_accessor :items, :merchants
                     all_files[:merchants])
   end
 
+  def find_items_by_merchant_id(id)
+    items.find_all_by_merchant_id(id)
+  end
+
+  def find_merchant_by_merchant_id(merchant_id)
+    merchants.find_by_id(merchant_id)
+  end
 #passing in hash to create an object with that hash. If wanted to do additional logic, create ItemRepo & MerchantRepo in from_csv
 end
 
