@@ -57,4 +57,6 @@ attr_reader :i, :se
     assert_equal "JewelleAccessories", invoice.merchant.name
   end
 
+  
+
 end

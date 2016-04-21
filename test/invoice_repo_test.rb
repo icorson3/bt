@@ -42,4 +42,8 @@ class InvoiceRepoTest < Minitest::Test
   def test_finds_all_by_status
     assert_equal 1473, i.find_all_by_status("pending").count
   end
+
+  def test_can_count_all_invoices
+    assert_equal 4985, i.invoice_count
+  end
 end

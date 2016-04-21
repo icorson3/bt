@@ -42,4 +42,19 @@ attr_reader :se, :sa
     assert_equal 5, sa.golden_items.count
   end
 
+  def test_average_invoices_per_merchant_works
+    assert_equal 10.49, sa.average_invoices_per_merchant
+  end
+
+  def test_average_invoices_per_merchant_standard_deviation
+    assert_equal 3.29, sa.average_invoices_per_merchant_standard_deviation
+  end
+
+  def test_top_merchants_by_invoice_count
+    assert_equal 12, sa.top_merchants_by_invoice_count.count
+  end
+
+  def test_bottom_merchants_by_invoice_count
+    assert_equal 4, sa.bottom_merchants_by_invoice_count.count
+  end
 end

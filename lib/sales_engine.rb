@@ -48,6 +48,10 @@ attr_accessor :items, :merchants, :invoices
     merchants.merchant_count
   end
 
+  def invoice_count
+    invoices.invoice_count
+  end
+  
   def merchant_repository
     merchants.merchant_array
   end
@@ -55,6 +59,12 @@ attr_accessor :items, :merchants, :invoices
   def item_repository
     items.item_array
   end
+
+  def invoice_repository
+    invoices.invoice_array
+  end
+
+
 #passing in hash to create an object with that hash. If wanted to do additional logic, create ItemRepo & MerchantRepo in from_csv
 end
 

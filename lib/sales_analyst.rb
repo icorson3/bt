@@ -20,7 +20,7 @@ class SalesAnalyst
       total + ((merchant_avg - avg) ** 2)
     end/(number_items_array.length - 1).to_f
 
-    Math.sqrt(sample_variance).round(2)
+    standard_deviation(sample_variance)
     #quick ways of returning arrays of merchants of merchants and items--all merchants and all items and all invoices on sales engine
   end
 
@@ -55,7 +55,7 @@ class SalesAnalyst
       total + ((price_avg - avg) ** 2)
     end/(prices.length - 1).to_f
 
-    Math.sqrt(sample_variance).round(2)
+    standard_deviation(sample_variance)
   end
 
   def prices
@@ -71,4 +71,43 @@ class SalesAnalyst
       item.unit_price > high_price
     end
   end
+
+  def average_invoices_per_merchant
+    (sales_engine.invoice_count.to_f / sales_engine.merchant_count.to_f).round(2)
+  end
+
+  def average_invoices_per_merchant_standard_deviation
+    mean = average_invoices_per_merchant
+    sample_variance = invoice_number_array.reduce(0) do |total,number|
+      total + ((number - mean) ** 2)
+    end/(invoice_number_array.length - 1).to_f
+
+    standard_deviation(sample_variance)
+  end
+
+  def standard_deviation(sample_variance)
+    Math.sqrt(sample_variance).round(2)
+  end
+
+  def invoice_number_array
+    sales_engine.merchant_repository.map do |merchant|
+      merchant.invoices.count
+    end
+  end
+
+  def top_merchants_by_invoice_count
+    high_invoice_count = average_invoices_per_merchant + (average_invoices_per_merchant_standard_deviation * 2)
+    sales_engine.merchant_repository.find_all do |merchant|
+      merchant.invoices.count > high_invoice_count
+    end
+  end
+
+  def bottom_merchants_by_invoice_count
+    low_invoice_count = average_invoices_per_merchant - (average_invoices_per_merchant_standard_deviation * 2)
+    sales_engine.merchant_repository.find_all do |merchant|
+      merchant.invoices.count < low_invoice_count
+    end
+  end
+
+  
 end
