@@ -30,7 +30,7 @@ class SalesAnalyst
     price_array = merchant_items.map do |merchant_item|
       merchant_item.unit_price
     end.reduce(:+)
-    price_array/merchant_items.count
+    (price_array/merchant_items.count).round(2)
   end
 
   def merchants_with_high_item_count
@@ -41,7 +41,7 @@ class SalesAnalyst
     end
   end
 
-  def average_average_price_for_merchant
+  def average_average_price_per_merchant
     total_sum_average_shop_prices = sales_engine.merchants.merchant_array.map do |merchant|
       average_item_price_for_merchant(merchant.id)
     end.reduce(:+)
@@ -49,7 +49,7 @@ class SalesAnalyst
   end
 
   def average_item_price_standard_deviation
-    avg = average_average_price_for_merchant
+    avg = average_average_price_per_merchant
     unit_price_array = sales_engine.items.item_array.map do |item|
       item.unit_price
     end
@@ -61,8 +61,8 @@ class SalesAnalyst
   end
 
   def golden_items
-    double_deviation = (average_average_price_for_merchant * 2)
-    high_price = double_deviation + average_average_price_for_merchant
+    double_deviation = (average_item_price_standard_deviation * 2)
+    high_price = double_deviation + average_average_price_per_merchant
     sales_engine.items.item_array.find_all do |item|
       item.unit_price > high_price
     end
