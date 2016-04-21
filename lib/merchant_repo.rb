@@ -12,7 +12,7 @@ class MerchantRepo
 
   def load_csv(merchant_file)
     if merchant_array.empty?
-      contents = CSV.read merchant_file, headers: true, header_converters: :symbol
+      contents ||= CSV.read merchant_file, headers: true, header_converters: :symbol
       parse_data(contents)
     end
   end
@@ -36,7 +36,12 @@ class MerchantRepo
   def all
     merchant_array
   end
-def find_items_by_merchant_id(id)
+
+  def merchant_count
+    all.count
+  end
+  
+  def find_items_by_merchant_id(id)
   sales_engine.find_items_by_merchant_id(id)
   end
 

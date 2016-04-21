@@ -9,7 +9,8 @@ class ItemRepoTest < Minitest::Test
   def setup
     @se = SalesEngine.from_csv({
       :items => "./data/items.csv",
-      :merchants => "./data/merchants.csv"
+      :merchants => "./data/merchants.csv",
+      :invoices => "./data/invoices.csv"
       })
     @ir = @se.items
   end
@@ -55,6 +56,9 @@ class ItemRepoTest < Minitest::Test
     assert_equal 1, ir.find_all_by_merchant_id(12335009).count
   end
 
+  def test_item_count_can_count_items
+    assert_equal 1367, ir.item_count
+  end
   # def test_find_all_with_description_returns_empty_array
   #   assert_equal [],ir.find_all_with_description("")
   # end

@@ -8,7 +8,8 @@ attr_reader :se, :sa
   def setup
     @se = SalesEngine.from_csv({
       :items => "./data/items.csv",
-      :merchants => "./data/merchants.csv"
+      :merchants => "./data/merchants.csv",
+      :invoices => './data/invoices.csv'
       })
     @sa = SalesAnalyst.new(se)
   end
@@ -26,7 +27,7 @@ attr_reader :se, :sa
   end
 
   def test_average_average_price_per_merchant
-    assert_equal BigDecimal, sa.average_average_price_for_merchant.class
+    assert_equal BigDecimal, sa.average_average_price_per_merchant.class
   end
 
   def test_standard_deviation_works_for_items_per_merchant
@@ -38,8 +39,7 @@ attr_reader :se, :sa
   end
 
   def test_highest_priced_items_returned_from_golden_items
-    assert_equal 38, sa.golden_items.count
-    assert_equal "Solid American Black Walnut Trestle Table", sa.golden_items[37].name
+    assert_equal 5, sa.golden_items.count
   end
 
 end

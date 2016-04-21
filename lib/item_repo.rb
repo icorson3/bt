@@ -11,9 +11,13 @@ class ItemRepo
     @item_array = []
   end
 
+  def item_count
+    all.count
+  end
+
   def load_csv(item_file)
     if item_array.empty?
-      contents = CSV.read item_file, headers: true, header_converters: :symbol
+      contents ||= CSV.read item_file, headers: true, header_converters: :symbol
       parse_data(contents)
     end
   end

@@ -20,8 +20,7 @@ class InvoiceRepoTest < Minitest::Test
   end
 
   def test_can_find_all
-    skip
-    assert_equal "Shopin1901", i.all[0]
+    assert_equal 1, i.all[0].id
   end
 
   def test_can_find_by_id
@@ -41,6 +40,6 @@ class InvoiceRepoTest < Minitest::Test
   end
 
   def test_finds_all_by_status
-    assert_equal 0, i.find_all_by_status("pending")
+    assert_equal 1473, i.find_all_by_status("pending").count
   end
 end
