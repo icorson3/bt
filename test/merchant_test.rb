@@ -8,7 +8,8 @@ attr_reader :m, :se
   def setup
     @se = SalesEngine.from_csv({
       :items => "./data/items.csv",
-      :merchants => "./data/merchants.csv"
+      :merchants => "./data/merchants.csv",
+      :invoices => "./data/invoices.csv"
       })
     @m = Merchant.new({:id => 5, :name => "Turing School"})
   end
@@ -28,6 +29,11 @@ attr_reader :m, :se
   def test_items_are_in_merchant_repo
     merchant = se.merchants.find_by_id(12334105)
     assert_equal "Vogue Paris Original Givenchy 2307", merchant.items[0].name
+  end
+
+  def test_invoices_for_merchants
+    merchant = se.merchants.find_by_id(12334105)
+    assert_equal 10, merchant.invoices.count
   end
 
 

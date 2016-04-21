@@ -40,9 +40,13 @@ class MerchantRepo
   def merchant_count
     all.count
   end
-  
+
   def find_items_by_merchant_id(id)
-  sales_engine.find_items_by_merchant_id(id)
+    sales_engine.find_items_by_merchant_id(id)
+  end
+
+  def find_invoices_by_merchant_id(id)
+    sales_engine.find_invoices_by_merchant_id(id)
   end
 
   def find_by_id(id)

@@ -1,10 +1,17 @@
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/invoice'
+require './lib/sales_engine'
 
 class InvoiceTest < Minitest::Test
-attr_reader :i
+attr_reader :i, :se
   def setup
+    @se = SalesEngine.from_csv({
+      :items => "./data/items.csv",
+      :merchants => "./data/merchants.csv",
+      :invoices => "./data/invoices.csv"
+      })
+
     @i = Invoice.new({
   :id          => 6,
   :customer_id => 7,
@@ -13,6 +20,7 @@ attr_reader :i
   :created_at  => Time.now,
   :updated_at  => Time.now,
   })
+
   end
 
   def test_invoice_exists
@@ -42,4 +50,11 @@ attr_reader :i
   def test_updated_at
     assert Time.now, i.updated_at
   end
+
+  def test_finds_merchant_by_merchant_id
+    invoice = se.invoices.find_by_id(9)
+
+    assert_equal "JewelleAccessories", invoice.merchant.name
+  end
+
 end

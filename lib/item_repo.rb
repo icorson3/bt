@@ -91,6 +91,7 @@ class ItemRepo
       sales_engine.find_merchant_by_merchant_id(merchant_id)
     end
 
+
   def find_all_by_merchant_id(merchant_id)
     if item_array.empty?
       item_array

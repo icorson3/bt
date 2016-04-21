@@ -11,5 +11,8 @@ attr_reader :id, :name, :merchant_array
     merchant_array.find_items_by_merchant_id(self.id)
   end
 
+  def invoices
+    merchant_array.find_invoices_by_merchant_id(self.id)
+  end
 
 end

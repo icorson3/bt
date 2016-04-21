@@ -7,7 +7,7 @@ require 'csv'
 class InvoiceRepo
   attr_accessor :invoice_array, :sales_engine
   def initialize(sales_engine)
-    @sales_engine ||= sales_engine
+    @sales_engine = sales_engine
     @invoice_array = []
   end
 
@@ -39,7 +39,7 @@ class InvoiceRepo
       status:  data[3],
       created_at: data[4],
       updated_at: data[5]
-      }, invoice_array)
+      }, self)
   end
 
   def all
@@ -68,6 +68,11 @@ class InvoiceRepo
     invoice_array.find_all do |invoice|
       invoice.status == status
     end
+  end
+
+  def find_merchant_by_merchant_id(merchant_id)
+
+    sales_engine.find_merchant_by_merchant_id(merchant_id)
   end
 
 end
