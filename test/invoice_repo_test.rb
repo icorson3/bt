@@ -8,9 +8,12 @@ class InvoiceRepoTest < Minitest::Test
   attr_reader :i, :se
   def setup
     @se = SalesEngine.from_csv({
-      :items => "./data/items.csv",
-      :merchants => "./data/merchants.csv",
-      :invoices => "./data/invoices.csv"
+      :items => './data/items.csv',
+      :merchants => './data/merchants.csv',
+      :invoices => './data/invoices.csv',
+      :invoice_items => './data/invoice_items.csv',
+      :transactions => './data/transactions.csv',
+      :customers => './data/customers.csv'
       })
     @i = @se.invoices
   end
@@ -35,12 +38,24 @@ class InvoiceRepoTest < Minitest::Test
     assert_equal 8, i.find_all_by_customer_id(1).count
   end
 
+  def test_finds_empty_array_by_bad_customer_id
+    assert_equal [], i.find_all_by_customer_id(38387)
+  end
+
   def test_finds_all_merchant_id
     assert_equal 16, i.find_all_by_merchant_id(12335938).count
   end
 
+  def test_finds_empty_array_by_bad_merchant_id
+    assert_equal [], i.find_all_by_merchant_id(1)
+  end
+
   def test_finds_all_by_status
-    assert_equal 1473, i.find_all_by_status("pending").count
+    assert_equal 1473, i.find_all_by_status(:pending).count
+  end
+
+  def test_finds_empty_array_by_bad_status
+    assert_equal [], i.find_all_by_status(:iteration)
   end
 
   def test_can_count_all_invoices

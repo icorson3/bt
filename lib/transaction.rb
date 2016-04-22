@@ -1,7 +1,7 @@
 class Transaction
   attr_reader :id, :invoice_id, :credit_card_number, :credit_card_expiration_date, :result, :created_at, :updated_at
 
-  def initialize(transaction_hash)
+  def initialize(transaction_hash, transaction_array = nil)
     @id = transaction_hash[:id]
     @invoice_id = transaction_hash[:invoice_id]
     @credit_card_number = transaction_hash[:credit_card_number]
@@ -9,6 +9,7 @@ class Transaction
     @result = transaction_hash[:result]
     @created_at = transaction_hash[:created_at]
     @updated_at = transaction_hash[:updated_at]
+    @transaction_array = transaction_array
   end
 end
 # t = Transaction.new({
