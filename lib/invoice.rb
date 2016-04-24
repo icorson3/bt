@@ -16,7 +16,7 @@ class Invoice
   end
 
   def items
-    invoice_array.find_items_by_invoice_id(self.merchant_id)
+    invoice_array.find_items_by_invoice_id(self.id)
   end
 
   def transactions

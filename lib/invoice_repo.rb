@@ -66,8 +66,8 @@ class InvoiceRepo
     sales_engine.find_merchant_by_merchant_id(merchant_id)
   end
 
-  def find_items_by_invoice_id(merchant_id)
-    sales_engine.find_items_by_invoice_id(merchant_id)
+  def find_items_by_invoice_id(id)
+    sales_engine.find_items_by_invoice_id(id)
   end
 
   def find_transactions_by_invoice_id(id)

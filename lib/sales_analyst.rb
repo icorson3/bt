@@ -118,13 +118,12 @@ class SalesAnalyst
 
   def top_days_by_invoice_count
     mean = sales_engine.invoice_days_of_week_mean
-    high_day_invoice_count = (invoice_days_of_week_standard_deviation * 2) + mean
+    high_day_invoice_count = invoice_days_of_week_standard_deviation  + mean
     hash = sales_engine.days_of_week_quantities
-    hash.each do |key, value|
-      if value > high_day_invoice_count
-        key.count
-      end
+    return_hash = hash.select do |key, value|
+     value > high_day_invoice_count
     end
+    return_hash.keys
   end
 
   def invoice_status(status)

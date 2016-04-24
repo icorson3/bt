@@ -46,8 +46,8 @@ attr_accessor :items, :merchants, :invoices, :invoice_items, :transactions, :cus
     invoices.find_all_by_merchant_id(id)
   end
 
-  def find_items_by_invoice_id(merchant_id)
-    invoices.find_by_id(merchant_id)
+  def find_items_by_invoice_id(id)
+    invoices.find_by_id(id)
   end
 
   def find_transactions_by_invoice_id(id)
