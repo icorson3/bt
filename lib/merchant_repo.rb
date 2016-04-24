@@ -49,6 +49,10 @@ class MerchantRepo
     sales_engine.find_invoices_by_merchant_id(id)
   end
 
+  def find_customers_by_merchant_id(id)
+    sales_engine.find_customers_by_merchant_id(id)
+  end
+
   def find_by_id(id)
     merchant_array.find { |merchant| merchant.id == id }
   end

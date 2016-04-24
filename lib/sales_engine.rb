@@ -47,15 +47,33 @@ attr_accessor :items, :merchants, :invoices, :invoice_items, :transactions, :cus
   end
 
   def find_items_by_invoice_id(id)
-    invoices.find_by_id(id)
+    invoice_items.find_all_by_invoice_id(id).map do |invoice_item|
+      items.find_by_id(invoice_item.item_id)
+    end
   end
 
-  def find_transactions_by_invoice_id(id)
-    invoices.find_by_id(id)
+  def find_customer_by_customer_id(customer_id)
+    customers.find_by_id(customer_id)
+  end
+
+  #go into the item repo and then find by id
+  def find_transactions_by_invoice_id(invoice_id)
+    transactions.find_all_by_invoice_id(invoice_id)
   end
 
   def find_merchant_by_merchant_id(merchant_id)
     merchants.find_by_id(merchant_id)
+  end
+
+  def find_invoice_by_transaction_id(id)
+    transaction_invoice_id = transactions.find_by_id(id).invoice_id
+    invoices.find_by_id(transaction_invoice_id)
+  end
+
+  def find_customers_by_merchant_id(id)
+    invoices.find_all_by_merchant_id(id).map do |merchant_customer|
+      customers.find_by_id(merchant_customer.customer_id)
+    end.uniq
   end
 
   def item_count
@@ -81,6 +99,14 @@ attr_accessor :items, :merchants, :invoices, :invoice_items, :transactions, :cus
   def invoice_repository
     invoices.invoice_array
   end
+
+  def invoice_item_repository
+    invoice_items.invoice_item_array
+  end
+
+  # def find_items_by_invoice_id(invoice_id)
+  #   invoice_items.find_all_by_item_id(item_id)
+  # end
 
   def invoice_days_of_week_mean
     invoices.days_of_week_mean

@@ -23,4 +23,8 @@ class Invoice
     invoice_array.find_transactions_by_invoice_id(self.id)
   end
 
+  def customer
+    invoice_array.find_customer_by_customer_id(self.customer_id)
+  end
+
 end

@@ -41,5 +41,10 @@ attr_reader :m, :se
     assert_equal 10, merchant.invoices.count
   end
 
+  def test_can_find_customers_for_merchants
+    merchant = se.merchants.find_by_id(12334105)
+    assert_equal 10, merchant.customers.count
+  end
+
 
 end

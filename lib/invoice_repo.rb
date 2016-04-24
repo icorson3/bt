@@ -74,6 +74,10 @@ class InvoiceRepo
     sales_engine.find_transactions_by_invoice_id(id)
   end
 
+  def find_customer_by_customer_id(customer_id)
+    sales_engine.find_customer_by_customer_id(customer_id)
+  end
+
   def invoice_count
     all.count
   end
@@ -101,5 +105,8 @@ class InvoiceRepo
     total_sum = invoice_days.inject(0) { |total,incidences| total + incidences }
     total_sum / 7
   end
+
+  #put in the invoice id and get the invoice. find invoice_items by invoice_id and then get items
+
 
 end

@@ -60,11 +60,17 @@ attr_reader :i, :se
 
   def test_can_find_items_by_invoice_id
     invoice = se.invoices.find_by_id(20)
-    assert_equal 12336163, invoice.items.merchant_id
+    assert_equal 5, invoice.items.count
   end
 
   def test_can_find_transactions_by_invoice_id
     invoice = se.invoices.find_by_id(20)
-    assert_equal 12336163, invoice.transactions.merchant_id
+    assert_equal 3, invoice.transactions.count
   end
+
+  def test_can_find_customers_by_customer_id
+    invoice = se.invoices.find_by_id(20)
+    assert_equal "Sylvester", invoice.customer.first_name
+  end
+
 end

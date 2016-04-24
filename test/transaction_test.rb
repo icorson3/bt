@@ -2,10 +2,20 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require 'bigdecimal'
 require './lib/transaction'
+require './lib/sales_engine'
 
 class TransactionTest < Minitest::Test
-attr_reader :t
+attr_reader :t, :se
   def setup
+
+    @se = SalesEngine.from_csv({
+      :items => './data/items.csv',
+      :merchants => './data/merchants.csv',
+      :invoices => './data/invoices.csv',
+      :invoice_items => './data/invoice_items.csv',
+      :transactions => './data/transactions.csv',
+      :customers => './data/customers.csv'
+      })
     @t = Transaction.new({
   :id => 6,
   :invoice_id => 8,
@@ -46,5 +56,10 @@ attr_reader :t
 
   def test_updated_at
     assert Time.now, t.updated_at
+  end
+
+  def test_can_find_invoices_by_transactions
+    transaction = se.transactions.find_by_id(40)
+    assert_equal 14, transaction.invoice.id
   end
 end
