@@ -63,4 +63,8 @@ class InvoiceItemRepo
   def find_all_by_invoice_id(invoice_id)
     invoice_item_array.find_all { |invoice_item| invoice_item.invoice_id == invoice_id }
   end
+
+  def find_all_by_date(date)
+    invoice_item_array.find_all { |invoice_item| invoice_item.created_at.strftime("%Y-%d-%m") == date }
+  end
 end

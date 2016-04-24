@@ -74,4 +74,8 @@ attr_reader :se, :sa
     assert_equal 56.95, sa.invoice_status(:shipped)
     assert_equal 13.5, sa.invoice_status(:returned)
   end
+
+  def test_total_revenue_by_date
+    assert_equal "", sa.total_revenue_by_date("2016-01-11")
+  end
 end

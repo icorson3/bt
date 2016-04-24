@@ -136,4 +136,14 @@ attr_accessor :items, :merchants, :invoices, :invoice_items, :transactions, :cus
       invoice_items.quantity * invoice_items.unit_price
     end.reduce(:+)
   end
+
+  def total_revenue_by_date(date)
+     invoice_items.find_all_by_date(date).map do |invoice_item|
+       invoice_item.reduce(0) do |sum, item|
+         sum += item.unit_price * item.quantity
+       end
+      # invoice_item.quantity * invoice_item.unit_price
+    end.reduce(:+)
+  end
+
 end
