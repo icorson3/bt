@@ -21,7 +21,6 @@ class SalesAnalyst
     end/(number_items_array.length - 1).to_f
 
     standard_deviation(sample_variance)
-    #quick ways of returning arrays of merchants of merchants and items--all merchants and all items and all invoices on sales engine
   end
 
   def average_item_price_for_merchant(merchant_id)
@@ -36,9 +35,7 @@ class SalesAnalyst
 
   def merchants_with_high_item_count
     high_item_count = average_items_per_merchant + average_items_per_merchant_standard_deviation
-    sales_engine.merchant_repository.find_all do |merchant|
-      merchant.items.count > high_item_count
-    end
+    sales_engine.merchant_repository.find_all { |merchant| merchant.items.count > high_item_count }
   end
 
   def average_average_price_per_merchant
@@ -125,9 +122,8 @@ class SalesAnalyst
     hash = sales_engine.days_of_week_quantities
     hash.each do |key, value|
       if value > high_day_invoice_count
-        key.count 
+        key.count
       end
-
     end
   end
 
@@ -135,9 +131,3 @@ class SalesAnalyst
     (((sales_engine.invoice_status(status).to_f)/(sales_engine.invoice_count.to_f)) * 100).round(2)
   end
 end
-
-    #create an array converting each created at into day of the week then count the instance that each day appears
-    #day of week count
-    #find the mean number of invoices per day of week
-    #find standard_deviation of the data set
-    #

@@ -1,8 +1,8 @@
 require_relative 'invoice'
 require_relative 'sales_engine'
 require 'csv'
-# require 'time'
-# require 'bigdecimal'
+require 'time'
+require 'bigdecimal'
 
 class InvoiceRepo
   attr_accessor :invoice_array, :sales_engine
@@ -47,31 +47,31 @@ class InvoiceRepo
   end
 
   def find_by_id(id)
-    invoice_array.find do |invoice|
-      invoice.id == id
-    end
+    invoice_array.find { |invoice| invoice.id == id }
   end
 
   def find_all_by_customer_id(customer_id)
-    invoice_array.find_all do |invoice|
-      invoice.customer_id == customer_id
-    end
+    invoice_array.find_all { |invoice| invoice.customer_id == customer_id }
   end
 
   def find_all_by_merchant_id(merchant_id)
-    invoice_array.find_all do |invoice|
-      invoice.merchant_id == merchant_id
-    end
+    invoice_array.find_all { |invoice| invoice.merchant_id == merchant_id }
   end
 
   def find_all_by_status(status)
-    invoice_array.find_all do |invoice|
-      invoice.status == status
-    end
+    invoice_array.find_all { |invoice| invoice.status == status }
   end
 
   def find_merchant_by_merchant_id(merchant_id)
     sales_engine.find_merchant_by_merchant_id(merchant_id)
+  end
+
+  def find_items_by_invoice_id(merchant_id)
+    sales_engine.find_items_by_invoice_id(merchant_id)
+  end
+
+  def find_transactions_by_invoice_id(id)
+    sales_engine.find_transactions_by_invoice_id(id)
   end
 
   def invoice_count
@@ -79,22 +79,16 @@ class InvoiceRepo
   end
 
   def days_of_week
-    invoice_array.map do |invoice|
-      invoice.created_at.strftime('%A')
-    end
+    invoice_array.map { |invoice| invoice.created_at.strftime('%A') }
   end
 
   def days_of_week_grouped
-    days_of_week.group_by do |day|
-      day
-    end
+    days_of_week.group_by { |day| day }
   end
 
   def days_of_week_quantities
     result_hash = {}
-    days_of_week_grouped.each do |key,value|
-      result_hash[key] = value.count
-    end
+    days_of_week_grouped.each { |key,value| result_hash[key] = value.count }
     result_hash
   end
 
@@ -104,9 +98,7 @@ class InvoiceRepo
 
   def days_of_week_mean
     invoice_days = days_of_week_quantities.values
-    total_sum = invoice_days.inject(0) do |total,incidences|
-     total + incidences
-    end
+    total_sum = invoice_days.inject(0) { |total,incidences| total + incidences }
     total_sum / 7
   end
 

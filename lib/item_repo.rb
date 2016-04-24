@@ -1,8 +1,8 @@
 require_relative 'sales_engine'
 require_relative 'item'
-require 'csv'
-require 'time'
 require 'bigdecimal'
+require 'time'
+require 'csv'
 
 class ItemRepo
   attr_accessor :item_array, :sales_engine
@@ -48,57 +48,35 @@ class ItemRepo
       }, self)
   end
 
-
   def all
     item_array
   end
-  #
+
   def find_by_id(id)
-    item_array.find do |item|
-      item.id == id
-    end
+    item_array.find { |item| item.id == id }
   end
 
   def find_by_name(name)
-    item_array.find do |item|
-    item.name.downcase == name.downcase
-    end
+    item_array.find { |item| item.name.downcase == name.downcase }
   end
 
   def find_all_with_description(phrase)
-    item_array.find_all do |item|
-      item.description.downcase == phrase.downcase
-    end
+    item_array.find_all { |item| item.description.downcase == phrase.downcase }
   end
 
   def find_all_by_price(unit_price)
-    item_array.find_all do |item|
-      item.unit_price == unit_price
-    end
+    item_array.find_all { |item| item.unit_price == unit_price }
   end
 
   def find_all_by_price_in_range(range)
-    if item_array.empty?
-      item_array
-    else
-      item_array.find_all do |item|
-        item.unit_price.between?(range.min,range.max)
-      end
-    end
+    item_array.find_all { |item| item.unit_price.between?(range.min,range.max) }
   end
 
   def find_merchant_by_merchant_id(merchant_id)
       sales_engine.find_merchant_by_merchant_id(merchant_id)
-    end
-
+  end
 
   def find_all_by_merchant_id(merchant_id)
-    if item_array.empty?
-      item_array
-    else
-      item_array.find_all do |item|
-        item.merchant_id == merchant_id
-      end
-    end
+      item_array.find_all { |item| item.merchant_id == merchant_id }
   end
 end

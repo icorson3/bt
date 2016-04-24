@@ -7,16 +7,21 @@ class ItemTest < Minitest::Test
 attr_reader :i, :se
   def setup
     @se = SalesEngine.from_csv({
-      :items => "./data/items.csv",
-      :merchants => "./data/merchants.csv"
+      :items => './data/items.csv',
+      :merchants => './data/merchants.csv',
+      :invoices => './data/invoices.csv',
+      :invoice_items => './data/invoice_items.csv',
+      :transactions => './data/transactions.csv',
+      :customers => './data/customers.csv'
       })
+
     @i = Item.new({
-  :name        => "Pencil",
-  :description => "You can use it to write things",
-  :unit_price  => BigDecimal.new(10.99,4),
-  :created_at  => Time.now,
-  :updated_at  => Time.now,
-  }, self)
+      :name        => "Pencil",
+      :description => "You can use it to write things",
+      :unit_price  => BigDecimal.new(10.99,4),
+      :created_at  => Time.now,
+      :updated_at  => Time.now,
+      }, self)
   end
 
   def test_item_class_exists

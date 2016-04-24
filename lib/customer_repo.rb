@@ -44,9 +44,7 @@ class CustomerRepo
   end
 
   def find_by_id(id)
-    customer_array.find do |customer|
-      customer.id == id
-    end
+    customer_array.find { |customer| customer.id == id }
   end
 
   def find_all_by_first_name(substring_fragment)

@@ -1,7 +1,7 @@
 require_relative 'transaction'
 require_relative 'sales_engine'
 require 'csv'
-# require 'time'
+require 'time'
 # require 'bigdecimal'
 
 class TransactionRepo
@@ -53,26 +53,18 @@ class TransactionRepo
   end
 
   def find_by_id(id)
-    transaction_array.find do |transaction|
-      transaction.id == id
-    end
+    transaction_array.find { |transaction| transaction.id == id }
   end
 
   def find_all_by_invoice_id(invoice_id)
-    transaction_array.find_all do |transaction|
-      transaction.invoice_id == invoice_id
-    end
+    transaction_array.find_all { |transaction| transaction.invoice_id == invoice_id }
   end
 
   def find_all_by_credit_card_number(credit_card_number)
-    transaction_array.find_all do |transaction|
-      transaction.credit_card_number == credit_card_number
-    end
+    transaction_array.find_all { |transaction| transaction.credit_card_number == credit_card_number }
   end
 
   def find_all_by_result(result)
-    transaction_array.find_all do |transaction|
-      transaction.result == result
-    end
+    transaction_array.find_all { |transaction| transaction.result == result }
   end
 end

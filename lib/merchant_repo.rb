@@ -50,21 +50,15 @@ class MerchantRepo
   end
 
   def find_by_id(id)
-    merchant_array.find do |merchant|
-      merchant.id == id
-    end
+    merchant_array.find { |merchant| merchant.id == id }
   end
 
   def find_by_name(name)
-    merchant_array.find do |merchant|
-      merchant.name.downcase == name.downcase
-    end
+    merchant_array.find { |merchant| merchant.name.downcase == name.downcase }
   end
 
   def find_all_by_name(name)
-    merchant_array.find_all do |merchant|
-      merchant.name.downcase.include?(name.downcase)
-    end
+    merchant_array.find_all { |merchant| merchant.name.downcase.include?(name.downcase) }
   end
 
 end

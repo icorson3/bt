@@ -7,11 +7,16 @@ class MerchantTest < Minitest::Test
 attr_reader :m, :se
   def setup
     @se = SalesEngine.from_csv({
-      :items => "./data/items.csv",
-      :merchants => "./data/merchants.csv",
-      :invoices => "./data/invoices.csv"
+      :items => './data/items.csv',
+      :merchants => './data/merchants.csv',
+      :invoices => './data/invoices.csv',
+      :invoice_items => './data/invoice_items.csv',
+      :transactions => './data/transactions.csv',
+      :customers => './data/customers.csv'
       })
-    @m = Merchant.new({:id => 5, :name => "Turing School"})
+
+    @m = Merchant.new({
+      :id => 5, :name => "Turing School"})
   end
 
   def test_merchant_class_exists

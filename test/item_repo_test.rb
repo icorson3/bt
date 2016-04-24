@@ -58,10 +58,6 @@ class ItemRepoTest < Minitest::Test
     assert_equal 2, ir.find_all_by_price_in_range(1000..1050).count
   end
 
-  def test_find_all_by_price_with_bad_price_returns_empty_array
-    assert_equal [], ir.find_all_by_price_in_range(0)
-  end
-
   def test_finds_all_from_user_id
     assert_equal 1, ir.find_all_by_merchant_id(12335009).count
   end

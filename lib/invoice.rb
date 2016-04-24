@@ -15,4 +15,12 @@ class Invoice
     invoice_array.find_merchant_by_merchant_id(self.merchant_id)
   end
 
+  def items
+    invoice_array.find_items_by_invoice_id(self.merchant_id)
+  end
+
+  def transactions
+    invoice_array.find_transactions_by_invoice_id(self.id)
+  end
+
 end

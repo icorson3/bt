@@ -2,8 +2,7 @@ require_relative 'invoice_item'
 require_relative 'sales_engine'
 require 'csv'
 require 'bigdecimal'
-# require 'time'
-# require 'bigdecimal'
+require 'time'
 
 class InvoiceItemRepo
   attr_accessor :invoice_item_array, :sales_engine
@@ -54,20 +53,14 @@ class InvoiceItemRepo
   end
 
   def find_by_id(id)
-    invoice_item_array.find do |invoice_item|
-      invoice_item.id == id
-    end
+    invoice_item_array.find { |invoice_item| invoice_item.id == id }
   end
 
   def find_all_by_item_id(item_id)
-    invoice_item_array.find_all do |invoice_item|
-      invoice_item.item_id == item_id
-    end
+    invoice_item_array.find_all { |invoice_item| invoice_item.item_id == item_id }
   end
 
   def find_all_by_invoice_id(invoice_id)
-    invoice_item_array.find_all do |invoice_item|
-      invoice_item.invoice_id == invoice_id
-    end
+    invoice_item_array.find_all { |invoice_item| invoice_item.invoice_id == invoice_id }
   end
 end

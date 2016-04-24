@@ -7,20 +7,22 @@ class InvoiceTest < Minitest::Test
 attr_reader :i, :se
   def setup
     @se = SalesEngine.from_csv({
-      :items => "./data/items.csv",
-      :merchants => "./data/merchants.csv",
-      :invoices => "./data/invoices.csv"
+      :items => './data/items.csv',
+      :merchants => './data/merchants.csv',
+      :invoices => './data/invoices.csv',
+      :invoice_items => './data/invoice_items.csv',
+      :transactions => './data/transactions.csv',
+      :customers => './data/customers.csv'
       })
 
     @i = Invoice.new({
-  :id          => 6,
-  :customer_id => 7,
-  :merchant_id => 8,
-  :status      => "pending",
-  :created_at  => Time.now,
-  :updated_at  => Time.now,
-  })
-
+      :id          => 6,
+      :customer_id => 7,
+      :merchant_id => 8,
+      :status      => "pending",
+      :created_at  => Time.now,
+      :updated_at  => Time.now,
+      })
   end
 
   def test_invoice_exists
@@ -53,10 +55,16 @@ attr_reader :i, :se
 
   def test_finds_merchant_by_merchant_id
     invoice = se.invoices.find_by_id(9)
-
     assert_equal "JewelleAccessories", invoice.merchant.name
   end
 
-  
+  def test_can_find_items_by_invoice_id
+    invoice = se.invoices.find_by_id(20)
+    assert_equal 12336163, invoice.items.merchant_id
+  end
 
+  def test_can_find_transactions_by_invoice_id
+    invoice = se.invoices.find_by_id(20)
+    assert_equal 12336163, invoice.transactions.merchant_id
+  end
 end
