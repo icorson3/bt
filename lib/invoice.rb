@@ -27,4 +27,11 @@ class Invoice
     invoice_array.find_customer_by_customer_id(self.customer_id)
   end
 
+  def is_paid_in_full?
+    invoice_array.find_paid_by_status(self.id)
+  end
+
+  def total
+    invoice_array.find_total(self.id)
+  end
 end

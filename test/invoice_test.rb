@@ -68,9 +68,18 @@ attr_reader :i, :se
     assert_equal 3, invoice.transactions.count
   end
 
-  def test_can_find_customers_by_customer_id
+  def test_can_find_customers_by_invoice_id
     invoice = se.invoices.find_by_id(20)
     assert_equal "Sylvester", invoice.customer.first_name
   end
 
+  def test_invoice_is_paid_in_full
+    invoice = se.invoices.find_by_id(272)
+    assert_equal true, invoice.is_paid_in_full?
+  end
+
+  def test_invoice_totals
+    invoice = se.invoices.find_by_id(272)
+    assert_equal BigDecimal, invoice.total.class
+  end
 end

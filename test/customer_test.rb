@@ -1,10 +1,20 @@
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/customer'
+require './lib/sales_engine'
 
 class CustomerTest < Minitest::Test
-attr_reader :c
+attr_reader :c, :se
   def setup
+    @se = SalesEngine.from_csv({
+      :items => './data/items.csv',
+      :merchants => './data/merchants.csv',
+      :invoices => './data/invoices.csv',
+      :invoice_items => './data/invoice_items.csv',
+      :transactions => './data/transactions.csv',
+      :customers => './data/customers.csv'
+      })
+
     @c = Customer.new({
     :id => 6,
     :first_name => "Joan",
@@ -36,5 +46,10 @@ attr_reader :c
 
   def test_updated_at
     assert Time.now, c.updated_at
+  end
+
+  def test_can_find_merchants_by_customer_id
+    customer = se.customers.find_by_id(30)
+    assert_equal 5, customer.merchants.count
   end
 end

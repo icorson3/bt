@@ -78,6 +78,14 @@ class InvoiceRepo
     sales_engine.find_customer_by_customer_id(customer_id)
   end
 
+  def find_paid_by_status(id)
+    sales_engine.find_paid_by_status(id)
+  end
+
+  def find_total(id)
+    sales_engine.find_total(id)
+  end
+
   def invoice_count
     all.count
   end

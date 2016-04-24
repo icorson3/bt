@@ -8,4 +8,8 @@ attr_reader :id, :first_name, :last_name, :created_at, :updated_at, :customer_ar
     @updated_at = customer_hash[:updated_at]
     @customer_array = customer_array
   end
+
+  def merchants
+    customer_array.find_merchants_by_customer_id(self.id)
+  end
 end

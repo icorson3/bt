@@ -126,6 +126,8 @@ class SalesAnalyst
     return_hash.keys
   end
 
+  
+
   def invoice_status(status)
     (((sales_engine.invoice_status(status).to_f)/(sales_engine.invoice_count.to_f)) * 100).round(2)
   end

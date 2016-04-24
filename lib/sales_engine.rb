@@ -56,7 +56,6 @@ attr_accessor :items, :merchants, :invoices, :invoice_items, :transactions, :cus
     customers.find_by_id(customer_id)
   end
 
-  #go into the item repo and then find by id
   def find_transactions_by_invoice_id(invoice_id)
     transactions.find_all_by_invoice_id(invoice_id)
   end
@@ -74,6 +73,18 @@ attr_accessor :items, :merchants, :invoices, :invoice_items, :transactions, :cus
     invoices.find_all_by_merchant_id(id).map do |merchant_customer|
       customers.find_by_id(merchant_customer.customer_id)
     end.uniq
+  end
+
+  def find_merchants_by_customer_id(id)
+    invoices.find_all_by_customer_id(id).map do |customer_merchant|
+      merchants.find_by_id(customer_merchant.merchant_id)
+    end.uniq
+  end
+
+  def find_paid_by_status(id)
+    transactions.find_all_by_invoice_id(id).any? do |transaction|
+      transaction.result == "success"
+    end
   end
 
   def item_count
@@ -104,10 +115,6 @@ attr_accessor :items, :merchants, :invoices, :invoice_items, :transactions, :cus
     invoice_items.invoice_item_array
   end
 
-  # def find_items_by_invoice_id(invoice_id)
-  #   invoice_items.find_all_by_item_id(item_id)
-  # end
-
   def invoice_days_of_week_mean
     invoices.days_of_week_mean
   end
@@ -124,12 +131,9 @@ attr_accessor :items, :merchants, :invoices, :invoice_items, :transactions, :cus
     invoices.find_all_by_status(status).count
   end
 
-#passing in hash to create an object with that hash. If wanted to do additional logic, create ItemRepo & MerchantRepo in from_csv
+  def find_total(id)
+    invoice_items.find_all_by_invoice_id(id).map do |invoice_items|
+      invoice_items.quantity * invoice_items.unit_price
+    end.reduce(:+)
+  end
 end
-
-#users in database, want to fetch all, also want to be able to retrieve first name
-
-
-
-# se = SalesEngine.from_csv('./data/items.csv')
-# se = SalesEngine.new.from_csv('file')
