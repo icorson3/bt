@@ -3,6 +3,7 @@ require_relative 'sales_engine'
 require 'csv'
 require 'time'
 require 'bigdecimal'
+require 'pry'
 
 class InvoiceRepo
   attr_accessor :invoice_array, :sales_engine
@@ -62,6 +63,10 @@ class InvoiceRepo
     invoice_array.find_all { |invoice| invoice.status == status }
   end
 
+  def find_all_by_created_at(date)
+    invoice_array.find_all { |invoice| invoice.created_at == date }
+  end
+
   def find_merchant_by_merchant_id(merchant_id)
     sales_engine.find_merchant_by_merchant_id(merchant_id)
   end
@@ -76,6 +81,10 @@ class InvoiceRepo
 
   def find_customer_by_customer_id(customer_id)
     sales_engine.find_customer_by_customer_id(customer_id)
+  end
+
+  def find_invoice_items_by_invoice_id(id)
+    sales_engine.find_invoice_items_by_invoice_id(id)
   end
 
   def find_paid_by_status(id)

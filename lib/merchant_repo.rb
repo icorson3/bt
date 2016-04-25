@@ -65,4 +65,14 @@ class MerchantRepo
     merchant_array.find_all { |merchant| merchant.name.downcase.include?(name.downcase) }
   end
 
+  def find_total_revenue(id)
+    find_invoices_by_merchant_id(id)
+  end
+
+  def all_invoices
+    merchant_array.map do |merchant|
+      find_invoices_by_merchant_id(merchant.id)
+    end
+  end
+
 end

@@ -69,4 +69,9 @@ class InvoiceRepoTest < Minitest::Test
   def test_days_of_week_mean
     assert_equal 712, i.days_of_week_mean
   end
+
+  def test_can_find_by_created_at_date
+    date = Time.parse("2009-02-07")
+    assert_equal 1, i.find_all_by_created_at(date).count
+  end
 end
