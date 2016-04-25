@@ -19,6 +19,12 @@ attr_reader :id, :name, :merchant_array
     merchant_array.find_customers_by_merchant_id(self.id)
   end
 
+  def has_pending_invoices?
+    !(invoices.find_all do |invoice|
+      !invoice.is_paid_in_full?
+    end.empty?)
+
+  end
 
 
 end

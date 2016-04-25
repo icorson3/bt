@@ -161,13 +161,25 @@ attr_accessor :items, :merchants, :invoices, :invoice_items, :transactions, :cus
   end
 
   def merchants_with_pending_invoices
-    merchant_invoices = merchants.all_invoices
-    @m = merchant_invoices.map do |merchant_invoice|
-      merchant_invoice.map do |invoice|
-      find_transactions_by_invoice_id(invoice.id)
-    end
-    end
+    merchants.merchants_with_pending_invoices
+    #
+    # pending_merchants = []
+    # merchant_repository.each do |merchant|
+    #   invoice = merchant.invoices
+    #   invoice.each do |i|
+    #         if i.is_paid_in_full? == false
+    #       pending_merchants << merchant
+    #     end
+    #   end
+    # end
+    # pending_merchants
   end
+    # merchant_invoices = merchants.all_invoices
+    # @m = merchant_invoices.map do |merchant_invoice|
+    #   merchant_invoice.map do |invoice|
+    #   find_transactions_by_invoice_id(invoice.id)
+    # end
+    # end
   #   merchants.find
 
   #   i = invoices.find_all_by_status(:pending)

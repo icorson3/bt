@@ -75,4 +75,15 @@ class MerchantRepo
     end
   end
 
+  def merchants_with_pending_invoices
+    merchant_array.find_all do |merchant|
+      merchant.has_pending_invoices?
+    end
+  end
+    #in merchant, have a method that will tell us whether there are any transactions that aren't paid in full
+    #find transactions that are pending
+    #find all invoices for each merchant
+    #iterate over invoices get all transactions for
+    #find out whether any of the invoices for the merchant have a is_paid_in_full? value of false
+    #
 end
