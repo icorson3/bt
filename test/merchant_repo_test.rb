@@ -50,4 +50,11 @@ class MerchantRepoTest < Minitest::Test
     assert_equal 475, mr.merchant_count
   end
 
+  def test_can_find_number_of_invoices_by_merchant_id
+    assert_equal 10, mr.find_total_revenue(12334105).count
+  end
+
+  def test_can_find_all_invoices_for_each_merchants
+    assert_equal 10, mr.all_invoices[0].count
+  end
 end

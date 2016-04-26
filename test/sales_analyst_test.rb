@@ -74,4 +74,19 @@ attr_reader :se, :sa
     assert_equal 56.95, sa.invoice_status(:shipped)
     assert_equal 13.5, sa.invoice_status(:returned)
   end
+
+  def test_total_revenue_by_date
+    date = Time.parse("2003-11-07")
+    se.invoices.find_all_by_created_at(date)
+    assert_equal BigDecimal, sa.total_revenue_by_date(date).class
+  end
+
+  # def test_top_revenue_earners
+  #
+  #   assert_equal "", sa.top_revenue_earners(5).count
+  # end
+
+  def test_merchants_with_pending_invoices
+    assert_equal 0, sa.merchants_with_pending_invoices
+  end
 end

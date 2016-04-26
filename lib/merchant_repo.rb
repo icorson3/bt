@@ -22,6 +22,7 @@ class MerchantRepo
       data = []
       data << row[:id].to_i
       data << row[:name]
+      data << Time.parse(row[:created_at])
       create_merchant_object(data)
     end
   end
@@ -29,7 +30,8 @@ class MerchantRepo
   def create_merchant_object(data)
     @merchant_array << Merchant.new({
       id: data[0],
-      name: data[1]
+      name: data[1],
+      created_at: data[2]
       }, self)
     end
 
@@ -63,6 +65,34 @@ class MerchantRepo
 
   def find_all_by_name(name)
     merchant_array.find_all { |merchant| merchant.name.downcase.include?(name.downcase) }
+  end
+
+  def find_total_revenue(id)
+    find_invoices_by_merchant_id(id)
+  end
+
+  def all_invoices
+    merchant_array.map do |merchant|
+      find_invoices_by_merchant_id(merchant.id)
+    end
+  end
+
+  def merchants_with_pending_invoices
+    merchant_array.find_all do |merchant|
+      merchant.has_pending_invoices?
+    end
+  end
+
+  def merchants_with_only_one_item
+    merchant_array.find_all do |merchant|
+      merchant.has_one_item?
+    end
+  end
+
+  def merchants_with_only_one_item_registered_in_month(month)
+    merchant_array.select do |merchant|
+      merchant.creation_date_items(month) == 1
+    end
   end
 
 end

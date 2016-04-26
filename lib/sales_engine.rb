@@ -81,6 +81,12 @@ attr_accessor :items, :merchants, :invoices, :invoice_items, :transactions, :cus
     end.uniq
   end
 
+  def find_invoice_items_by_invoice_id(id)
+      invoices.find_by_id(id).map do |invoice|
+        invoice_items.find_all_by_invoice_id(invoice.id)
+    end
+  end
+
   def find_paid_by_status(id)
     transactions.find_all_by_invoice_id(id).any? do |transaction|
       transaction.result == "success"
@@ -136,4 +142,34 @@ attr_accessor :items, :merchants, :invoices, :invoice_items, :transactions, :cus
       invoice_items.quantity * invoice_items.unit_price
     end.reduce(:+)
   end
+
+  def total_revenue_by_date(date)
+    created_date = invoices.find_all_by_created_at(date)
+    created_date.map do |invoice|
+      find_total(invoice.id)
+    end.reduce(:+)
+  end
+
+  def top_revenue_earners(number)
+#each merchant find the invoices using invoice method in merchant and map
+
+  # merchant_invoices = merchants.merchant_array.map do |merchant|
+  #     find_invoices_by_merchant_id(merchant.id)
+  #     merchant_invoices.map do |merchant_invoice|
+  #       merchant_invoice.map do |m|
+  #         m.quantity
+  end
+
+  def merchants_with_pending_invoices
+    merchants.merchants_with_pending_invoices
+  end
+
+  def merchants_with_only_one_item
+  merchants.merchants_with_only_one_item
+  end
+
+  def merchants_with_only_one_item_registered_in_month(month)
+  merchants.merchants_with_only_one_item_registered_in_month(month)
+  end
+
 end

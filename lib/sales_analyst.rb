@@ -126,9 +126,29 @@ class SalesAnalyst
     return_hash.keys
   end
 
-  
-
   def invoice_status(status)
     (((sales_engine.invoice_status(status).to_f)/(sales_engine.invoice_count.to_f)) * 100).round(2)
   end
+
+  def total_revenue_by_date(date)
+    sales_engine.total_revenue_by_date(date)
+  end
+
+  # def top_revenue_earners(number)
+  #
+  # end
+  #
+  def merchants_with_pending_invoices
+    sales_engine.merchants_with_pending_invoices
+  end
+
+  def merchants_with_only_one_item
+    sales_engine.merchants_with_only_one_item
+  end
+  
+  def merchants_with_only_one_item_registered_in_month(month)
+    sales_engine.merchants_with_only_one_item_registered_in_month(month)
+  end
+
+
 end
