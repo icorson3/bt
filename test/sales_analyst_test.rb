@@ -89,4 +89,12 @@ attr_reader :se, :sa
   def test_merchants_with_pending_invoices
     assert_equal 0, sa.merchants_with_pending_invoices
   end
+
+  def test_revenue_by_merchant
+    assert_equal 0, sa.revenue_by_merchant(12334105)
+  end
+
+  def test_merchants_ranked_by_revenue
+    assert_equal "",sa.merchants_ranked_by_revenue.first.name
+  end
 end

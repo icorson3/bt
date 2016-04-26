@@ -143,11 +143,31 @@ attr_accessor :items, :merchants, :invoices, :invoice_items, :transactions, :cus
     end.reduce(:+)
   end
 
+  # def find_total_for_invoice(id)
+  #   invoice = invoices.find_by_id(id)
+  #   if invoice.is_paid_in_full?
+  #     find_total(id)
+  #   end
+  # end
+
   def total_revenue_by_date(date)
     created_date = invoices.find_all_by_created_at(date)
     created_date.map do |invoice|
       find_total(invoice.id)
     end.reduce(:+)
+  end
+
+  def revenue_by_merchant(merchant_id)
+    merchant = find_merchant_by_merchant_id(merchant_id)
+    merchant.invoices.map do |invoice|
+      find_total(invoice.id)
+    end.reduce(:+)
+  end
+
+  def merchants_ranked_by_revenue
+    @merchants_ranked = merchant_repository.sort_by do |merchant|
+      revenue_by_merchant(merchant.id)
+    end.reverse
   end
 
   def top_revenue_earners(number)

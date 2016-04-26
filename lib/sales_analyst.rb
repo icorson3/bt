@@ -134,10 +134,10 @@ class SalesAnalyst
     sales_engine.total_revenue_by_date(date)
   end
 
-  # def top_revenue_earners(number)
-  #
-  # end
-  #
+  def revenue_by_merchant(merchant_id)
+    sales_engine.revenue_by_merchant(merchant_id)
+  end
+
   def merchants_with_pending_invoices
     sales_engine.merchants_with_pending_invoices
   end
@@ -145,9 +145,17 @@ class SalesAnalyst
   def merchants_with_only_one_item
     sales_engine.merchants_with_only_one_item
   end
-  
+
   def merchants_with_only_one_item_registered_in_month(month)
     sales_engine.merchants_with_only_one_item_registered_in_month(month)
+  end
+
+  def merchants_ranked_by_revenue
+    sales_engine.merchants_ranked_by_revenue
+  end
+
+  def top_revenue_earners(number)
+    sales_engine.top_revenue_earners(number)
   end
 
 
