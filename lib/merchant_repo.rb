@@ -22,6 +22,7 @@ class MerchantRepo
       data = []
       data << row[:id].to_i
       data << row[:name]
+      data << Time.parse(row[:created_at])
       create_merchant_object(data)
     end
   end
@@ -29,7 +30,8 @@ class MerchantRepo
   def create_merchant_object(data)
     @merchant_array << Merchant.new({
       id: data[0],
-      name: data[1]
+      name: data[1],
+      created_at: data[2]
       }, self)
     end
 
@@ -80,10 +82,17 @@ class MerchantRepo
       merchant.has_pending_invoices?
     end
   end
-    #in merchant, have a method that will tell us whether there are any transactions that aren't paid in full
-    #find transactions that are pending
-    #find all invoices for each merchant
-    #iterate over invoices get all transactions for
-    #find out whether any of the invoices for the merchant have a is_paid_in_full? value of false
-    #
+
+  def merchants_with_only_one_item
+    merchant_array.find_all do |merchant|
+      merchant.has_one_item?
+    end
+  end
+
+  def merchants_with_only_one_item_registered_in_month(month)
+    merchant_array.select do |merchant|
+      merchant.creation_date_items(month) == 1
+    end
+  end
+
 end

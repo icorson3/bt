@@ -134,11 +134,21 @@ class SalesAnalyst
     sales_engine.total_revenue_by_date(date)
   end
 
-  def top_revenue_earners(number)
-    sales_engine.top_revenue_earners(number)
-  end
-
+  # def top_revenue_earners(number)
+  #
+  # end
+  #
   def merchants_with_pending_invoices
     sales_engine.merchants_with_pending_invoices
   end
+
+  def merchants_with_only_one_item
+    sales_engine.merchants_with_only_one_item
+  end
+  
+  def merchants_with_only_one_item_registered_in_month(month)
+    sales_engine.merchants_with_only_one_item_registered_in_month(month)
+  end
+
+
 end
