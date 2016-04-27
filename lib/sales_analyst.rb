@@ -154,7 +154,7 @@ class SalesAnalyst
     sales_engine.merchants_ranked_by_revenue
   end
 
-  def top_revenue_earners(number)
+  def top_revenue_earners(number = 20)
     sales_engine.top_revenue_earners(number)
   end
 

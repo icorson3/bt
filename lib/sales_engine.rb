@@ -8,7 +8,7 @@ require_relative 'sales_analyst'
 require 'csv'
 
 class SalesEngine
-attr_accessor :items, :merchants, :invoices, :invoice_items, :transactions, :customers
+  attr_accessor :items, :merchants, :invoices, :invoice_items, :transactions, :customers
 
   def initialize(items_file, merchant_file,invoice_file, invoice_item_file, transaction_file, customer_file)
     @items = ItemRepo.new(self)
@@ -31,11 +31,11 @@ attr_accessor :items, :merchants, :invoices, :invoice_items, :transactions, :cus
 
   def self.from_csv(all_files)
     SalesEngine.new(all_files[:items],
-                    all_files[:merchants],
-                    all_files[:invoices],
-                    all_files[:invoice_items],
-                    all_files[:transactions],
-                    all_files[:customers])
+    all_files[:merchants],
+    all_files[:invoices],
+    all_files[:invoice_items],
+    all_files[:transactions],
+    all_files[:customers])
   end
 
   def find_items_by_merchant_id(id)
@@ -82,9 +82,8 @@ attr_accessor :items, :merchants, :invoices, :invoice_items, :transactions, :cus
   end
 
   def find_invoice_items_by_invoice_id(id)
-      invoices.find_by_id(id).map do |invoice|
-        invoice_items.find_all_by_invoice_id(invoice.id)
-    end
+    invoice = invoices.find_by_id(id)
+      invoice_items.find_all_by_invoice_id(invoice.id)
   end
 
   def find_paid_by_status(id)
@@ -143,6 +142,7 @@ attr_accessor :items, :merchants, :invoices, :invoice_items, :transactions, :cus
     end.reduce(:+)
   end
 
+
   # def find_total_for_invoice(id)
   #   invoice = invoices.find_by_id(id)
   #   if invoice.is_paid_in_full?
@@ -158,26 +158,22 @@ attr_accessor :items, :merchants, :invoices, :invoice_items, :transactions, :cus
   end
 
   def revenue_by_merchant(merchant_id)
-    merchant = find_merchant_by_merchant_id(merchant_id)
-    merchant.invoices.map do |invoice|
-      find_total(invoice.id)
+    merchant = merchants.find_by_id(merchant_id)
+    merchant.paid_in_full_invoices.map do |invoice|
+      invoice.total
     end.reduce(:+)
   end
 
-  def merchants_ranked_by_revenue
-    @merchants_ranked = merchant_repository.sort_by do |merchant|
-      revenue_by_merchant(merchant.id)
-    end.reverse
+  def top_revenue_earners(number)
+    adjusted_number = number-1
+    merchants_ranked_by_revenue[0..adjusted_number]
   end
 
-  def top_revenue_earners(number)
-#each merchant find the invoices using invoice method in merchant and map
-
-  # merchant_invoices = merchants.merchant_array.map do |merchant|
-  #     find_invoices_by_merchant_id(merchant.id)
-  #     merchant_invoices.map do |merchant_invoice|
-  #       merchant_invoice.map do |m|
-  #         m.quantity
+  def merchants_ranked_by_revenue
+    sorted = merchant_repository_ids.sort_by do |merchant_id|
+        revenue_by_merchant(merchant_id).to_f
+    end.reverse
+     sorted.map {|id| merchants.find_by_id(id)}
   end
 
   def merchants_with_pending_invoices
@@ -185,11 +181,17 @@ attr_accessor :items, :merchants, :invoices, :invoice_items, :transactions, :cus
   end
 
   def merchants_with_only_one_item
-  merchants.merchants_with_only_one_item
+    merchants.merchants_with_only_one_item
   end
 
   def merchants_with_only_one_item_registered_in_month(month)
-  merchants.merchants_with_only_one_item_registered_in_month(month)
+    merchants.merchants_with_only_one_item_registered_in_month(month)
+  end
+
+  def merchant_repository_ids
+    merchant_repository.map do |merchant|
+      merchant.id
+    end
   end
 
 end

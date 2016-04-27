@@ -26,12 +26,6 @@ attr_reader :id, :name, :created_at, :merchant_array
     end.empty?)
   end
 
-  def top_revenue_earners(num)
-    invoices.reduce(0) do |sum, amount|
-      require "pry"; binding.pry
-    end
-  end
-
   def creation_date_items(month)
     if created_at.strftime("%B") == month
       items.count
@@ -40,5 +34,11 @@ attr_reader :id, :name, :created_at, :merchant_array
 
   def has_one_item?
      items.count == 1
+   end
+
+   def paid_in_full_invoices
+     invoices.find_all do |invoice|
+       invoice.is_paid_in_full?
+     end
    end
 end

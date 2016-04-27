@@ -67,4 +67,15 @@ class InvoiceItemRepo
   def find_all_by_date(date)
     invoice_item_array.find_all { |invoice_item| invoice_item.created_at.strftime("%Y-%d-%m") == date }
   end
+
+  def all_invoice_items_quantity(invoice_id)
+    grouped_invoice_items = find_all_by_invoice_id(invoice_id).group_by { |invoice_item| invoice_item.item_id }
+
+    grouped = grouped_invoice_items.values
+    grouped.sort_by { |group| group.length }.reverse
+  end
+
+  def quantity_of_invoice_items(invoice_id)
+    find_all_by_invoice_id(invoice_id).map { |invoice_item| invoice_item.quantity }
+  end
 end
