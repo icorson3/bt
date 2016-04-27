@@ -158,5 +158,9 @@ class SalesAnalyst
     sales_engine.top_revenue_earners(number)
   end
 
+  def most_sold_item_for_merchant(merchant_id)
+    sales_engine.most_sold_item_for_merchant(merchant_id)
+  end
+
 
 end

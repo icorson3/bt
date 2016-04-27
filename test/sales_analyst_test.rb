@@ -97,4 +97,8 @@ attr_reader :se, :sa
   def test_merchants_ranked_by_revenue
     assert_equal "",sa.merchants_ranked_by_revenue.first.name
   end
+
+  def test_most_sold_item_for_merchant
+    assert sa.most_sold_item_for_merchant(12334105)
+  end
 end

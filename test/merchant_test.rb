@@ -46,5 +46,39 @@ attr_reader :m, :se
     assert_equal 10, merchant.customers.count
   end
 
+  def test_can_find_invoice_items
+    merchant = se.merchants.find_by_id(12334105)
+    assert_equal 28, merchant.invoice_items.count
+  end
 
+  def test_invoice_item_max
+    merchant = se.merchants.find_by_id(12334105)
+    assert_equal 263543136, merchant.invoice_item_max.item_id
+  end
+
+  def test_weighted_array_gives_invoice_items_by_occurrences
+    merchant = se.merchants.find_by_id(12334105)
+    assert_equal 250, merchant.weighted_array_by_invoice_item_occurrences.count
+  end
+
+  def test_grouped_by_invoice_item_occurrences
+    merchant = se.merchants.find_by_id(12334105)
+    assert_equal Hash, merchant.grouped_by_invoice_item_occurrences.class
+  end
+
+  # def test_most_sold_item
+  #   merchant = se.merchants.find_by_id(12334105)
+  #   assert_equal 8, merchant.most_sold_item.uniq.count
+  #   # assert_equal "", merchant.most_sold_item.merchant_id
+  # end
+  #
+  # def test_invoice_item_ids
+  #   merchant = se.merchants.find_by_id(12334105)
+  #   assert_equal 42, merchant.invoice_item_ids.count
+  # end
+  #
+  # def test_most_sold_item_again
+  #   merchant = se.merchants.find_by_id(12334105)
+  #   assert_equal Item, merchant.most_sold_item[0].class
+  # end
 end

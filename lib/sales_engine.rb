@@ -52,6 +52,12 @@ class SalesEngine
     end
   end
 
+  def find_invoice_items_by_item_id(id)
+    items.find_by_id(id).map do |item|
+      invoice_items.find_all_by_item_id(item.id)
+    end
+  end
+
   def find_customer_by_customer_id(customer_id)
     customers.find_by_id(customer_id)
   end
@@ -141,6 +147,10 @@ class SalesEngine
       invoice_items.quantity * invoice_items.unit_price
     end.reduce(:+)
   end
+
+  # def most_sold_item_for_merchant(merchant_id)
+  #   merchant_invoice_items =
+  # end
 
 
   # def find_total_for_invoice(id)

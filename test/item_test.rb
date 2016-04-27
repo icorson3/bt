@@ -60,4 +60,10 @@ attr_reader :i, :se
     sample_item = se.items.find_by_id(263395721)
     assert_equal "Madewithgitterxx", sample_item.merchant.name
   end
+
+  # def test_quantity_sold_returns_total_quantity_sold_for_item
+  #   sample_item = se.items.find_by_id(263395721)
+  #   assert_equal 0,sample_item.quantity_sold
+  # end
+
 end
