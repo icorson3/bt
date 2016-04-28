@@ -13,7 +13,8 @@ class InvoiceItemRepo
 
   def load_csv(invoice_item_file)
     if invoice_item_array.empty?
-      contents = CSV.read invoice_item_file, headers: true, header_converters: :symbol
+      contents = CSV.read invoice_item_file,
+      headers: true, header_converters: :symbol
       parse_data(contents)
     end
   end
@@ -53,18 +54,26 @@ class InvoiceItemRepo
   end
 
   def find_by_id(id)
-    invoice_item_array.find { |invoice_item| invoice_item.id == id }
+    invoice_item_array.find do |invoice_item|
+      invoice_item.id == id
+    end
   end
 
   def find_all_by_item_id(item_id)
-    invoice_item_array.find_all { |invoice_item| invoice_item.item_id == item_id }
+    invoice_item_array.find_all do |invoice_item|
+      invoice_item.item_id == item_id
+    end
   end
 
   def find_all_by_invoice_id(invoice_id)
-    invoice_item_array.find_all { |invoice_item| invoice_item.invoice_id == invoice_id }
+    invoice_item_array.find_all do |invoice_item|
+      invoice_item.invoice_id == invoice_id
+    end
   end
 
   def find_all_by_date(date)
-    invoice_item_array.find_all { |invoice_item| invoice_item.created_at.strftime("%Y-%d-%m") == date }
+    invoice_item_array.find_all do |invoice_item|
+      invoice_item.created_at.strftime("%Y-%d-%m") == date
+    end
   end
 end

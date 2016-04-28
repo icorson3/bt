@@ -86,20 +86,18 @@ attr_reader :se, :sa
   end
 
   def test_revenue_by_merchant
-    assert_equal 0, sa.revenue_by_merchant(12334105)
+    assert_equal BigDecimal, sa.revenue_by_merchant(12334105).class
   end
 
   def test_merchants_ranked_by_revenue
-    assert_equal "",sa.merchants_ranked_by_revenue.first.name
+    assert_equal 475,sa.merchants_ranked_by_revenue.class
   end
 
   def test_most_sold_item_for_merchant
-    assert_equal 0, sa.most_sold_item_for_merchant(12334105)
+    assert_equal 5, sa.most_sold_item_for_merchant(12334105).class
   end
 
   def test_best_item_for_merchant
-    assert_equal "", sa.best_item_for_merchant(12334105)
-
-    #go into invoices and invoice items total ranked and then return that item by id?
+    assert_equal 263561102, sa.best_item_for_merchant(12334105).class
   end
 end

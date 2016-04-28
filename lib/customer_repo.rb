@@ -12,7 +12,8 @@ class CustomerRepo
 
   def load_csv(customer_file)
     if customer_array.empty?
-      contents = CSV.read customer_file, headers: true, header_converters: :symbol
+      contents = CSV.read customer_file,
+      headers: true, header_converters: :symbol
       parse_data(contents)
     end
   end

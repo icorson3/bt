@@ -61,25 +61,8 @@ attr_reader :m, :se
     assert_equal 10, merchant.invoice_item_max
   end
 
-  def test_invoice_items_with_highest_revenue
-    merchant = se.merchants.find_by_id(12334105)
-    assert_equal 24323, merchant.invoice_items_with_highest_revenue.item_id
-    12334403
-  end
-
   def test_most_sold_item_for_merchant
     merchant = se.merchants.find_by_id(12337105)
     assert_equal 4, merchant.most_sold_item_for_merchant.count
   end
-
-  def test_best_item_for_merchant
-    merchant = se.merchants.find_by_id(12334105)
-    assert_equal "", merchant.best_item_for_merchant
-  end
-
-  def test_highest_revenue_max
-    merchant = se.merchants.find_by_id(12334105)
-    assert_equal 8841.96, merchant.highest_revenue_max
-  end
-
 end

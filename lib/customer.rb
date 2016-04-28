@@ -1,5 +1,6 @@
 class Customer
-attr_reader :id, :first_name, :last_name, :created_at, :updated_at, :customer_array
+attr_reader :id, :first_name, :last_name,
+            :created_at, :updated_at, :customer_array
   def initialize(customer_hash, customer_array = nil)
     @id = customer_hash[:id]
     @first_name = customer_hash[:first_name]

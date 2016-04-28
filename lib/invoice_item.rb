@@ -1,5 +1,6 @@
 class InvoiceItem
-attr_reader :id, :item_id, :invoice_id, :quantity, :unit_price, :created_at, :updated_at
+attr_reader :id, :item_id, :invoice_id,
+            :quantity, :unit_price, :created_at, :updated_at
   def initialize(invoice_item_hash, invoice_item_array = nil)
     @id = invoice_item_hash[:id]
     @item_id = invoice_item_hash[:item_id]

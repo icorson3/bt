@@ -12,7 +12,8 @@ class MerchantRepo
 
   def load_csv(merchant_file)
     if merchant_array.empty?
-      contents ||= CSV.read merchant_file, headers: true, header_converters: :symbol
+      contents ||= CSV.read merchant_file,
+      headers: true, header_converters: :symbol
       parse_data(contents)
     end
   end
@@ -60,15 +61,21 @@ class MerchantRepo
   end
 
   def find_by_id(id)
-    merchant_array.find { |merchant| merchant.id == id }
+    merchant_array.find do |merchant|
+      merchant.id == id
+    end
   end
 
   def find_by_name(name)
-    merchant_array.find { |merchant| merchant.name.downcase == name.downcase }
+    merchant_array.find do |merchant|
+      merchant.name.downcase == name.downcase
+    end
   end
 
   def find_all_by_name(name)
-    merchant_array.find_all { |merchant| merchant.name.downcase.include?(name.downcase) }
+    merchant_array.find_all do |merchant|
+      merchant.name.downcase.include?(name.downcase)
+    end
   end
 
   def find_total_revenue(id)
