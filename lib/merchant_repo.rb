@@ -47,6 +47,10 @@ class MerchantRepo
     sales_engine.find_items_by_merchant_id(id)
   end
 
+  def find_item_by_item_id(item_id)
+    sales_engine.find_item_by_item_id(item_id)
+  end
+
   def find_invoices_by_merchant_id(id)
     sales_engine.find_invoices_by_merchant_id(id)
   end
@@ -82,6 +86,7 @@ class MerchantRepo
       merchant.has_pending_invoices?
     end
   end
+
 
   def merchants_with_only_one_item
     merchant_array.find_all do |merchant|

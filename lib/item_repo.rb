@@ -79,4 +79,8 @@ class ItemRepo
   def find_all_by_merchant_id(merchant_id)
       item_array.find_all { |item| item.merchant_id == merchant_id }
   end
+
+  def find_invoice_items_by_item_id(id)
+    sales_engine.find_invoice_items_by_item_id(id)
+  end
 end

@@ -1,4 +1,5 @@
 require 'minitest/autorun'
+
 require 'minitest/pride'
 require './lib/customer'
 require './lib/sales_engine'

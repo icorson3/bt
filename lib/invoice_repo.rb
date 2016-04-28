@@ -91,6 +91,7 @@ class InvoiceRepo
     sales_engine.find_paid_by_status(id)
   end
 
+  #group_by item id invoice_item
   # def find_total(id)
   #
   # end

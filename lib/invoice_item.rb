@@ -10,4 +10,9 @@ attr_reader :id, :item_id, :invoice_id, :quantity, :unit_price, :created_at, :up
     @updated_at = invoice_item_hash[:updated_at]
     @invoice_item_array = invoice_item_array
   end
+
+  def revenue
+    quantity * unit_price
+  end
+
 end

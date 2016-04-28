@@ -36,6 +36,13 @@ class Invoice
   end
 
   def total
-    invoice_array.find_total(self.id)
+    if is_paid_in_full?
+      invoice_items.map do |invoice_item|
+        invoice_item.revenue
+      end.reduce(:+)
+    else
+      0
+    end
   end
+
 end

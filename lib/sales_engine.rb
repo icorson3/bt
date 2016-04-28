@@ -8,7 +8,7 @@ require_relative 'sales_analyst'
 require 'csv'
 
 class SalesEngine
-attr_accessor :items, :merchants, :invoices, :invoice_items, :transactions, :customers
+  attr_accessor :items, :merchants, :invoices, :invoice_items, :transactions, :customers
 
   def initialize(items_file, merchant_file,invoice_file, invoice_item_file, transaction_file, customer_file)
     @items = ItemRepo.new(self)
@@ -31,11 +31,11 @@ attr_accessor :items, :merchants, :invoices, :invoice_items, :transactions, :cus
 
   def self.from_csv(all_files)
     SalesEngine.new(all_files[:items],
-                    all_files[:merchants],
-                    all_files[:invoices],
-                    all_files[:invoice_items],
-                    all_files[:transactions],
-                    all_files[:customers])
+    all_files[:merchants],
+    all_files[:invoices],
+    all_files[:invoice_items],
+    all_files[:transactions],
+    all_files[:customers])
   end
 
   def find_items_by_merchant_id(id)
@@ -50,6 +50,17 @@ attr_accessor :items, :merchants, :invoices, :invoice_items, :transactions, :cus
     invoice_items.find_all_by_invoice_id(id).map do |invoice_item|
       items.find_by_id(invoice_item.item_id)
     end
+  end
+
+  def find_invoice_items_by_item_id(id)
+
+    items.find_by_id(id).map do |item|
+      invoice_items.find_all_by_item_id(item.id)
+    end
+  end
+
+  def find_item_by_item_id(id)
+    items.find_by_id(id)
   end
 
   def find_customer_by_customer_id(customer_id)
@@ -82,9 +93,8 @@ attr_accessor :items, :merchants, :invoices, :invoice_items, :transactions, :cus
   end
 
   def find_invoice_items_by_invoice_id(id)
-      invoices.find_by_id(id).map do |invoice|
-        invoice_items.find_all_by_invoice_id(invoice.id)
-    end
+    invoice = invoices.find_by_id(id)
+    invoice_items.find_all_by_invoice_id(invoice.id)
   end
 
   def find_paid_by_status(id)
@@ -143,6 +153,14 @@ attr_accessor :items, :merchants, :invoices, :invoice_items, :transactions, :cus
     end.reduce(:+)
   end
 
+  def most_sold_item_for_merchant(merchant_id)
+    merchants.find_by_id(merchant_id).most_sold_item_for_merchant
+  end
+
+  def best_item_for_merchant(merchant_id)
+    merchants.find_by_id(merchant_id).best_item_for_merchant
+  end
+
   def total_revenue_by_date(date)
     created_date = invoices.find_all_by_created_at(date)
     created_date.map do |invoice|
@@ -150,14 +168,23 @@ attr_accessor :items, :merchants, :invoices, :invoice_items, :transactions, :cus
     end.reduce(:+)
   end
 
-  def top_revenue_earners(number)
-#each merchant find the invoices using invoice method in merchant and map
+  def revenue_by_merchant(merchant_id)
+    merchant = merchants.find_by_id(merchant_id)
+    merchant.paid_in_full_invoices.map do |invoice|
+      invoice.total
+    end.reduce(:+)
+  end
 
-  # merchant_invoices = merchants.merchant_array.map do |merchant|
-  #     find_invoices_by_merchant_id(merchant.id)
-  #     merchant_invoices.map do |merchant_invoice|
-  #       merchant_invoice.map do |m|
-  #         m.quantity
+  def top_revenue_earners(number)
+    adjusted_number = number-1
+    merchants_ranked_by_revenue[0..adjusted_number]
+  end
+
+  def merchants_ranked_by_revenue
+    sorted = merchant_repository_ids.sort_by do |merchant_id|
+      revenue_by_merchant(merchant_id).to_f
+    end.reverse
+    sorted.map {|id| merchants.find_by_id(id)}
   end
 
   def merchants_with_pending_invoices
@@ -165,11 +192,43 @@ attr_accessor :items, :merchants, :invoices, :invoice_items, :transactions, :cus
   end
 
   def merchants_with_only_one_item
-  merchants.merchants_with_only_one_item
+    merchants.merchants_with_only_one_item
   end
 
   def merchants_with_only_one_item_registered_in_month(month)
-  merchants.merchants_with_only_one_item_registered_in_month(month)
+    merchants.merchants_with_only_one_item_registered_in_month(month)
   end
 
+  def merchant_repository_ids
+    merchant_repository.map do |merchant|
+      merchant.id
+    end
+  end
+
+  def successful_invoices(merchant_id)
+    find_invoices_by_merchant_id(merchant_id).select do |invoice|
+     invoice.is_paid_in_full?
+   end
+  end
+
+  def merchant_invoice_items(merchant_id)
+    successful_invoices(merchant_id).map do |merchant_invoice| invoice_items.find_all_by_invoice_id(merchant_invoice.id)
+    end.flatten
+  end
+
+  def best_invoice_revenue(merchant_id)
+    merchant_invoice_items(merchant_id).max_by do |invoice_item|
+    invoice_item.revenue
+    end.revenue
+  end
+
+  def top_invoice_items(merchant_id)
+    merchant_invoice_items(merchant_id).select do |invoice_item|
+    invoice_item.revenue == best_invoice_revenue(merchant_id)
+    end[0]
+  end
+
+  def best_item_for_merchant(merchant_id)
+     items.find_by_id(top_invoice_items(merchant_id).item_id)
+  end
 end

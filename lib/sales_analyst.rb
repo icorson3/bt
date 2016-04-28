@@ -134,10 +134,10 @@ class SalesAnalyst
     sales_engine.total_revenue_by_date(date)
   end
 
-  # def top_revenue_earners(number)
-  #
-  # end
-  #
+  def revenue_by_merchant(merchant_id)
+    sales_engine.revenue_by_merchant(merchant_id)
+  end
+
   def merchants_with_pending_invoices
     sales_engine.merchants_with_pending_invoices
   end
@@ -145,10 +145,55 @@ class SalesAnalyst
   def merchants_with_only_one_item
     sales_engine.merchants_with_only_one_item
   end
-  
+
   def merchants_with_only_one_item_registered_in_month(month)
     sales_engine.merchants_with_only_one_item_registered_in_month(month)
   end
+
+  def merchants_ranked_by_revenue
+    sales_engine.merchants_ranked_by_revenue
+  end
+
+  def top_revenue_earners(number = 20)
+    sales_engine.top_revenue_earners(number)
+  end
+
+  def most_sold_item_for_merchant(merchant_id)
+    sales_engine.most_sold_item_for_merchant(merchant_id)
+  end
+
+  # def best_item_for_merchant(merchant_id)
+  #   sales_engine.best_item_for_merchant(merchant_id)
+  # end
+  def best_item_for_merchant(merchant_id)
+    sales_engine.best_item_for_merchant(merchant_id)
+  end
+  #
+  #  merchant_invoices = sales_engine.find_invoices_by_merchant_id(merchant_id)
+   #
+  #  successful_invoices = merchant_invoices.select do |invoice|
+  #    invoice.is_paid_in_full?
+  #  end
+   #
+  #  merchant_invoice_items = successful_invoices.map do |merchant_invoice|
+  #    sales_engine.invoice_items.find_all_by_invoice_id(merchant_invoice.id)
+  #  end.flatten
+   #
+  #  best_invoice_item = merchant_invoice_items.max_by do |invoice_item|
+  #    invoice_item.quantity * invoice_item.unit_price
+  #  end
+
+ #   best_item_price = best_invoice_item.quantity * best_invoice_item.unit_price
+ #
+ #   top_invoice_items = merchant_invoice_items.select do |invoice_item|
+ #     invoice_item.quantity * invoice_item.unit_price == best_item_price
+ #   end
+ #
+ #   top_invoice_item = top_invoice_items[0]
+ #
+ #   sales_engine.items.find_by_id(top_invoice_item.item_id)
+ #
+ # end
 
 
 end
