@@ -8,19 +8,23 @@ require_relative 'sales_analyst'
 require 'csv'
 
 class SalesEngine
-  attr_accessor :items, :merchants, :invoices, :invoice_items, :transactions, :customers
+  attr_accessor :items, :merchants, :invoices,
+                :invoice_items, :transactions, :customers
 
-  def initialize(items_file, merchant_file,invoice_file, invoice_item_file, transaction_file, customer_file)
+  def initialize(items_file, merchant_file,invoice_file,
+                invoice_item_file, transaction_file, customer_file)
     @items = ItemRepo.new(self)
     @merchants = MerchantRepo.new(self)
     @invoices = InvoiceRepo.new(self)
     @invoice_items = InvoiceItemRepo.new(self)
     @transactions = TransactionRepo.new(self)
     @customers = CustomerRepo.new(self)
-    csv_files(items_file, merchant_file, invoice_file, invoice_item_file, transaction_file, customer_file)
+    csv_files(items_file, merchant_file, invoice_file,
+              invoice_item_file, transaction_file, customer_file)
   end
 
-  def csv_files(items_file, merchant_file, invoice_file, invoice_item_file, transaction_file, customer_file)
+  def csv_files(items_file, merchant_file, invoice_file,
+                invoice_item_file, transaction_file, customer_file)
     items.load_csv(items_file)
     merchants.load_csv(merchant_file)
     invoices.load_csv(invoice_file)
@@ -212,7 +216,8 @@ class SalesEngine
   end
 
   def merchant_invoice_items(merchant_id)
-    successful_invoices(merchant_id).map do |merchant_invoice| invoice_items.find_all_by_invoice_id(merchant_invoice.id)
+    successful_invoices(merchant_id).map do |merchant_invoice|
+      invoice_items.find_all_by_invoice_id(merchant_invoice.id)
     end.flatten
   end
 

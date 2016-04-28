@@ -13,7 +13,8 @@ class TransactionRepo
 
   def load_csv(transaction_file)
     if transaction_array.empty?
-      contents = CSV.read transaction_file, headers: true, header_converters: :symbol
+      contents = CSV.read transaction_file,
+      headers: true, header_converters: :symbol
       parse_data(contents)
     end
   end
@@ -53,19 +54,27 @@ class TransactionRepo
   end
 
   def find_by_id(id)
-    transaction_array.find { |transaction| transaction.id == id }
+    transaction_array.find do |transaction|
+      transaction.id == id
+    end
   end
 
   def find_all_by_invoice_id(invoice_id)
-    transaction_array.find_all { |transaction| transaction.invoice_id == invoice_id }
+    transaction_array.find_all do |transaction|
+      transaction.invoice_id == invoice_id
+    end
   end
 
   def find_all_by_credit_card_number(credit_card_number)
-    transaction_array.find_all { |transaction| transaction.credit_card_number == credit_card_number }
+    transaction_array.find_all do |transaction|
+      transaction.credit_card_number == credit_card_number
+    end
   end
 
   def find_all_by_result(result)
-    transaction_array.find_all { |transaction| transaction.result == result }
+    transaction_array.find_all do |transaction|
+      transaction.result == result
+    end
   end
 
   def find_invoice_by_transaction_id(id)

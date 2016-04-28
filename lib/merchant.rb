@@ -7,7 +7,6 @@ attr_reader :id, :name, :created_at, :merchant_array
     @merchant_array = merchant_array
   end
 
-
   def items
     merchant_array.find_items_by_merchant_id(self.id)
   end
@@ -17,14 +16,14 @@ attr_reader :id, :name, :created_at, :merchant_array
   end
 
   def valid_invoices
-      invoices.find_all do |invoice|
-        invoice.is_paid_in_full?
+    invoices.find_all do |invoice|
+      invoice.is_paid_in_full?
     end
   end
 
   def valid_invoice_ids
     valid_invoices.map do |invoice|
-        invoice.id
+      invoice.id
     end
   end
 
@@ -35,13 +34,17 @@ attr_reader :id, :name, :created_at, :merchant_array
   end
 
   def invoice_item_max
-    invoice_items.max_by { |invoice_item| invoice_item.quantity }.quantity
+    invoice_items.max_by do |invoice_item|
+    invoice_item.quantity
+    end.quantity
   end
 
   def invoice_items_with_max
-    invoice_items.find_all { |invoice_item|
-      invoice_item.quantity == invoice_item_max && valid_invoice_ids.include?(invoice_item.invoice_id)
-    }
+    invoice_items.find_all do |invoice_item|
+      id = invoice_item.invoice_id
+      x = valid_invoice_ids.include?(id)
+      invoice_item.quantity == invoice_item_max && x
+    end
   end
 
   def most_sold_item_for_merchant

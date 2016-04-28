@@ -1,5 +1,6 @@
 class Invoice
-  attr_reader :id, :customer_id, :merchant_id, :status, :created_at, :updated_at, :invoice_array
+  attr_reader :id, :customer_id, :merchant_id,
+              :status, :created_at, :updated_at, :invoice_array
 
   def initialize(invoice_hash, invoice_array = nil)
     @id = invoice_hash[:id]

@@ -14,7 +14,8 @@ class InvoiceRepo
 
   def load_csv(invoice_file)
     if invoice_array.empty?
-      contents = CSV.read invoice_file, headers: true, header_converters: :symbol
+      contents = CSV.read invoice_file,
+      headers: true, header_converters: :symbol
       parse_data(contents)
     end
   end
@@ -48,23 +49,33 @@ class InvoiceRepo
   end
 
   def find_by_id(id)
-    invoice_array.find { |invoice| invoice.id == id }
+    invoice_array.find do |invoice|
+      invoice.id == id
+    end
   end
 
   def find_all_by_customer_id(customer_id)
-    invoice_array.find_all { |invoice| invoice.customer_id == customer_id }
+    invoice_array.find_all do |invoice|
+      invoice.customer_id == customer_id
+    end
   end
 
   def find_all_by_merchant_id(merchant_id)
-    invoice_array.find_all { |invoice| invoice.merchant_id == merchant_id }
+    invoice_array.find_all do |invoice|
+      invoice.merchant_id == merchant_id
+    end
   end
 
   def find_all_by_status(status)
-    invoice_array.find_all { |invoice| invoice.status == status }
+    invoice_array.find_all do |invoice|
+      invoice.status == status
+    end
   end
 
   def find_all_by_created_at(date)
-    invoice_array.find_all { |invoice| invoice.created_at == date }
+    invoice_array.find_all do |invoice|
+      invoice.created_at == date
+    end
   end
 
   def find_merchant_by_merchant_id(merchant_id)
@@ -91,25 +102,27 @@ class InvoiceRepo
     sales_engine.find_paid_by_status(id)
   end
 
-  #group_by item id invoice_item
-  # def find_total(id)
-  #
-  # end
   def invoice_count
     all.count
   end
 
   def days_of_week
-    invoice_array.map { |invoice| invoice.created_at.strftime('%A') }
+    invoice_array.map do |invoice|
+      invoice.created_at.strftime('%A')
+    end
   end
 
   def days_of_week_grouped
-    days_of_week.group_by { |day| day }
+    days_of_week.group_by do |day|
+      day
+    end
   end
 
   def days_of_week_quantities
     result_hash = {}
-    days_of_week_grouped.each { |key,value| result_hash[key] = value.count }
+    days_of_week_grouped.each do |key,value|
+      result_hash[key] = value.count
+    end
     result_hash
   end
 
@@ -119,11 +132,9 @@ class InvoiceRepo
 
   def days_of_week_mean
     invoice_days = days_of_week_quantities.values
-    total_sum = invoice_days.inject(0) { |total,incidences| total + incidences }
+    total_sum = invoice_days.inject(0) do |total,incidences|
+      total + incidences
+    end
     total_sum / 7
   end
-
-  #put in the invoice id and get the invoice. find invoice_items by invoice_id and then get items
-
-
 end

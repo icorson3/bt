@@ -7,7 +7,6 @@ require './lib/sales_engine'
 class TransactionTest < Minitest::Test
 attr_reader :t, :se
   def setup
-
     @se = SalesEngine.from_csv({
       :items => './data/items.csv',
       :merchants => './data/merchants.csv',
@@ -17,14 +16,14 @@ attr_reader :t, :se
       :customers => './data/customers.csv'
       })
     @t = Transaction.new({
-  :id => 6,
-  :invoice_id => 8,
-  :credit_card_number => "4242424242424242",
-  :credit_card_expiration_date => "0220",
-  :result => "success",
-  :created_at => Time.now,
-  :updated_at => Time.now
-  })
+      :id => 6,
+      :invoice_id => 8,
+      :credit_card_number => "4242424242424242",
+      :credit_card_expiration_date => "0220",
+      :result => "success",
+      :created_at => Time.now,
+      :updated_at => Time.now
+      })
   end
 
   def test_transaction_exists

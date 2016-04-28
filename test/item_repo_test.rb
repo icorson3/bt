@@ -69,8 +69,4 @@ class ItemRepoTest < Minitest::Test
   def test_find_all_with_description_returns_empty_array
     assert_equal [],ir.find_all_with_description("")
   end
-
-  def test_can_find_invoice_items_by_item_id
-    assert_equal 18, ir.find_invoice_items_by_item_id(263395237).count
-  end
 end

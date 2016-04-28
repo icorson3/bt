@@ -53,8 +53,4 @@ class InvoiceItemRepoTest < Minitest::Test
   def test_empty_array_for_bad_invoice_id
     assert_equal [], ii.find_all_by_invoice_id(1029381)
   end
-
-  def test_all_invoice_items_quantity
-    assert_equal 0, ii.all_invoice_items_quantity(1).count
-  end
 end
