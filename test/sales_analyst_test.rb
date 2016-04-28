@@ -81,11 +81,6 @@ attr_reader :se, :sa
     assert_equal BigDecimal, sa.total_revenue_by_date(date).class
   end
 
-  # def test_top_revenue_earners
-  #
-  #   assert_equal "", sa.top_revenue_earners(5).count
-  # end
-
   def test_merchants_with_pending_invoices
     assert_equal 0, sa.merchants_with_pending_invoices
   end
@@ -99,6 +94,12 @@ attr_reader :se, :sa
   end
 
   def test_most_sold_item_for_merchant
-    assert sa.most_sold_item_for_merchant(12334105)
+    assert_equal 0, sa.most_sold_item_for_merchant(12334105)
+  end
+
+  def test_best_item_for_merchant
+    assert_equal "", sa.best_item_for_merchant(12334105)
+
+    #go into invoices and invoice items total ranked and then return that item by id?
   end
 end

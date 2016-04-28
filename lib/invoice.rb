@@ -38,12 +38,11 @@ class Invoice
   def total
     if is_paid_in_full?
       invoice_items.map do |invoice_item|
-        invoice_item.quantity * invoice_item.unit_price
+        invoice_item.revenue
       end.reduce(:+)
     else
       0
     end
   end
-
 
 end

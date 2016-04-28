@@ -11,5 +11,8 @@ attr_reader :id, :item_id, :invoice_id, :quantity, :unit_price, :created_at, :up
     @invoice_item_array = invoice_item_array
   end
 
+  def revenue
+    quantity * unit_price
+  end
 
 end

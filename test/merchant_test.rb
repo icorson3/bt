@@ -41,6 +41,11 @@ attr_reader :m, :se
     assert_equal 10, merchant.invoices.count
   end
 
+  def test_valid_invoices_only
+    merchant = se.merchants.find_by_id(12334105)
+    assert_equal 5, merchant.valid_invoices.count
+  end
+
   def test_can_find_customers_for_merchants
     merchant = se.merchants.find_by_id(12334105)
     assert_equal 10, merchant.customers.count
@@ -48,37 +53,33 @@ attr_reader :m, :se
 
   def test_can_find_invoice_items
     merchant = se.merchants.find_by_id(12334105)
-    assert_equal 28, merchant.invoice_items.count
+    assert_equal 45, merchant.invoice_items.count
   end
 
   def test_invoice_item_max
     merchant = se.merchants.find_by_id(12334105)
-    assert_equal 263543136, merchant.invoice_item_max.item_id
+    assert_equal 10, merchant.invoice_item_max
   end
 
-  def test_weighted_array_gives_invoice_items_by_occurrences
+  def test_invoice_items_with_highest_revenue
     merchant = se.merchants.find_by_id(12334105)
-    assert_equal 250, merchant.weighted_array_by_invoice_item_occurrences.count
+    assert_equal 24323, merchant.invoice_items_with_highest_revenue.item_id
+    12334403
   end
 
-  def test_grouped_by_invoice_item_occurrences
+  def test_most_sold_item_for_merchant
+    merchant = se.merchants.find_by_id(12337105)
+    assert_equal 4, merchant.most_sold_item_for_merchant.count
+  end
+
+  def test_best_item_for_merchant
     merchant = se.merchants.find_by_id(12334105)
-    assert_equal Hash, merchant.grouped_by_invoice_item_occurrences.class
+    assert_equal "", merchant.best_item_for_merchant
   end
 
-  # def test_most_sold_item
-  #   merchant = se.merchants.find_by_id(12334105)
-  #   assert_equal 8, merchant.most_sold_item.uniq.count
-  #   # assert_equal "", merchant.most_sold_item.merchant_id
-  # end
-  #
-  # def test_invoice_item_ids
-  #   merchant = se.merchants.find_by_id(12334105)
-  #   assert_equal 42, merchant.invoice_item_ids.count
-  # end
-  #
-  # def test_most_sold_item_again
-  #   merchant = se.merchants.find_by_id(12334105)
-  #   assert_equal Item, merchant.most_sold_item[0].class
-  # end
+  def test_highest_revenue_max
+    merchant = se.merchants.find_by_id(12334105)
+    assert_equal 8841.96, merchant.highest_revenue_max
+  end
+
 end

@@ -53,9 +53,14 @@ class SalesEngine
   end
 
   def find_invoice_items_by_item_id(id)
+
     items.find_by_id(id).map do |item|
       invoice_items.find_all_by_item_id(item.id)
     end
+  end
+
+  def find_item_by_item_id(id)
+    items.find_by_id(id)
   end
 
   def find_customer_by_customer_id(customer_id)
@@ -89,7 +94,7 @@ class SalesEngine
 
   def find_invoice_items_by_invoice_id(id)
     invoice = invoices.find_by_id(id)
-      invoice_items.find_all_by_invoice_id(invoice.id)
+    invoice_items.find_all_by_invoice_id(invoice.id)
   end
 
   def find_paid_by_status(id)
@@ -148,17 +153,13 @@ class SalesEngine
     end.reduce(:+)
   end
 
-  # def most_sold_item_for_merchant(merchant_id)
-  #   merchant_invoice_items =
-  # end
+  def most_sold_item_for_merchant(merchant_id)
+    merchants.find_by_id(merchant_id).most_sold_item_for_merchant
+  end
 
-
-  # def find_total_for_invoice(id)
-  #   invoice = invoices.find_by_id(id)
-  #   if invoice.is_paid_in_full?
-  #     find_total(id)
-  #   end
-  # end
+  def best_item_for_merchant(merchant_id)
+    merchants.find_by_id(merchant_id).best_item_for_merchant
+  end
 
   def total_revenue_by_date(date)
     created_date = invoices.find_all_by_created_at(date)
@@ -181,9 +182,9 @@ class SalesEngine
 
   def merchants_ranked_by_revenue
     sorted = merchant_repository_ids.sort_by do |merchant_id|
-        revenue_by_merchant(merchant_id).to_f
+      revenue_by_merchant(merchant_id).to_f
     end.reverse
-     sorted.map {|id| merchants.find_by_id(id)}
+    sorted.map {|id| merchants.find_by_id(id)}
   end
 
   def merchants_with_pending_invoices
@@ -204,4 +205,30 @@ class SalesEngine
     end
   end
 
+  def successful_invoices(merchant_id)
+    find_invoices_by_merchant_id(merchant_id).select do |invoice|
+     invoice.is_paid_in_full?
+   end
+  end
+
+  def merchant_invoice_items(merchant_id)
+    successful_invoices(merchant_id).map do |merchant_invoice| invoice_items.find_all_by_invoice_id(merchant_invoice.id)
+    end.flatten
+  end
+
+  def best_invoice_revenue(merchant_id)
+    merchant_invoice_items(merchant_id).max_by do |invoice_item|
+    invoice_item.revenue
+    end.revenue
+  end
+
+  def top_invoice_items(merchant_id)
+    merchant_invoice_items(merchant_id).select do |invoice_item|
+    invoice_item.revenue == best_invoice_revenue(merchant_id)
+    end[0]
+  end
+
+  def best_item_for_merchant(merchant_id)
+     items.find_by_id(top_invoice_items(merchant_id).item_id)
+  end
 end
