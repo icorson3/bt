@@ -161,9 +161,9 @@ class SalesEngine
     merchants.find_by_id(merchant_id).most_sold_item_for_merchant
   end
 
-  def best_item_for_merchant(merchant_id)
-    merchants.find_by_id(merchant_id).best_item_for_merchant
-  end
+  # def best_item_for_merchant(merchant_id)
+  #   merchants.find_by_id(merchant_id).best_item_for_merchant
+  # end
 
   def total_revenue_by_date(date)
     created_date = invoices.find_all_by_created_at(date)

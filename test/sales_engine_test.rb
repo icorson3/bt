@@ -91,4 +91,8 @@ class SalesEngineTest < Minitest::Test
     assert_equal 21067.77, invoice.total
   end
 
+  def test_merchants_ranked_by_revenue
+    merchant = se.merchants
+    assert_equal 12334634, se.merchants_ranked_by_revenue[0].id
+  end
 end

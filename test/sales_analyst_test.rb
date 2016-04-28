@@ -82,22 +82,18 @@ attr_reader :se, :sa
   end
 
   def test_merchants_with_pending_invoices
-    assert_equal 0, sa.merchants_with_pending_invoices
+    assert_equal 467, sa.merchants_with_pending_invoices.count
   end
 
   def test_revenue_by_merchant
     assert_equal BigDecimal, sa.revenue_by_merchant(12334105).class
   end
 
-  def test_merchants_ranked_by_revenue
-    assert_equal 475,sa.merchants_ranked_by_revenue.class
-  end
-
   def test_most_sold_item_for_merchant
-    assert_equal 5, sa.most_sold_item_for_merchant(12334105).class
+    assert_equal 5, sa.most_sold_item_for_merchant(12334105).count
   end
 
   def test_best_item_for_merchant
-    assert_equal 263561102, sa.best_item_for_merchant(12334105).class
+    assert_equal 263561102, sa.best_item_for_merchant(12334105).id
   end
 end

@@ -5,7 +5,7 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <script src='./assets/0.10.0/application.js' type='text/javascript'></script>    
     <link href='./assets/0.10.0/application.css' media='screen, projection, print' rel='stylesheet' type='text/css'>
-    <link rel="shortcut icon" type="image/png" href="./assets/0.10.0/favicon_red.png" />
+    <link rel="shortcut icon" type="image/png" href="./assets/0.10.0/favicon_green.png" />
     <link rel="icon" type="image/png" href="./assets/0.10.0/favicon.png" />
   </head>
   
@@ -14,27 +14,27 @@
       <img src="./assets/0.10.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2016-04-27T23:25:03-06:00">2016-04-27T23:25:03-06:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2016-04-28T01:03:54-06:00">2016-04-28T01:03:54-06:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
         <div class="file_list_container" id="AllFiles">
   <h2>
     <span class="group_name">All Files</span>
-    (<span class="covered_percent"><span class="red">59.02%</span></span>
+    (<span class="covered_percent"><span class="green">98.41%</span></span>
      covered at
      <span class="covered_strength">
-       <span class="red">
-         0.6
+       <span class="green">
+         1.53
        </span>
     </span> hits/line)
   </h2>
   <a name="AllFiles"></a>
   <div>
-    <b>2</b> files in total.
-    <b>61</b> relevant lines. 
-    <span class="green"><b>36</b> lines covered</span> and
-    <span class="red"><b>25</b> lines missed </span>
+    <b>3</b> files in total.
+    <b>63</b> relevant lines. 
+    <span class="green"><b>62</b> lines covered</span> and
+    <span class="red"><b>1</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -51,23 +51,33 @@
     <tbody>
       
       <tr>
+        <td class="strong"><a href="#6b1251d43dad7130c90b4ded874f9a1e4ec08920" class="src_link" title="test/test_helper.rb">test/test_helper.rb</a></td>
+        <td class="green strong">100.0 %</td>
+        <td>2</td>
+        <td>2</td>
+        <td>2</td>
+        <td>0</td>
+        <td>1.0</td>
+      </tr>
+      
+      <tr>
         <td class="strong"><a href="#95931438e7213f72eb8b2004b225eb17914762ba" class="src_link" title="test/transaction_repo_test.rb">test/transaction_repo_test.rb</a></td>
-        <td class="red strong">59.38 %</td>
+        <td class="green strong">96.88 %</td>
         <td>66</td>
         <td>32</td>
-        <td>19</td>
-        <td>13</td>
-        <td>0.6</td>
+        <td>31</td>
+        <td>1</td>
+        <td>1.5</td>
       </tr>
       
       <tr>
         <td class="strong"><a href="#95ef81f5ac11761468b53116dc52db39fb758a15" class="src_link" title="test/transaction_test.rb">test/transaction_test.rb</a></td>
-        <td class="red strong">58.62 %</td>
+        <td class="green strong">100.0 %</td>
         <td>64</td>
         <td>29</td>
-        <td>17</td>
-        <td>12</td>
-        <td>0.6</td>
+        <td>29</td>
+        <td>0</td>
+        <td>1.6</td>
       </tr>
       
     </tbody>
@@ -86,14 +96,44 @@
     
       <div class="source_files">
       
+        <div class="source_table" id="6b1251d43dad7130c90b4ded874f9a1e4ec08920">
+  <div class="header">
+    <h3>test/test_helper.rb</h3>
+    <h4><span class="green">100.0 %</span> covered</h4>
+    <div>
+      <b>2</b> relevant lines. 
+      <span class="green"><b>2</b> lines covered</span> and
+      <span class="red"><b>0</b> lines missed.</span>
+    </div>
+  </div>
+  
+  <pre>
+    <ol>
+      
+        <li class="covered" data-hits="1" data-linenumber="1">
+          <span class="hits">1</span>
+          
+          <code class="ruby">require &quot;simplecov&quot;</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="2">
+          <span class="hits">1</span>
+          
+          <code class="ruby">SimpleCov.start</code>
+        </li>
+      
+    </ol>
+  </pre>
+</div>
+      
         <div class="source_table" id="95931438e7213f72eb8b2004b225eb17914762ba">
   <div class="header">
     <h3>test/transaction_repo_test.rb</h3>
-    <h4><span class="red">59.38 %</span> covered</h4>
+    <h4><span class="green">96.88 %</span> covered</h4>
     <div>
       <b>32</b> relevant lines. 
-      <span class="green"><b>19</b> lines covered</span> and
-      <span class="red"><b>13</b> lines missed.</span>
+      <span class="green"><b>31</b> lines covered</span> and
+      <span class="red"><b>1</b> lines missed.</span>
     </div>
   </div>
   
@@ -154,8 +194,8 @@
           <code class="ruby">  def setup</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="10">
-          
+        <li class="covered" data-hits="10" data-linenumber="10">
+          <span class="hits">10</span>
           
           <code class="ruby">    @se = SalesEngine.from_csv({</code>
         </li>
@@ -202,8 +242,8 @@
           <code class="ruby">      })</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="18">
-          
+        <li class="covered" data-hits="10" data-linenumber="18">
+          <span class="hits">10</span>
           
           <code class="ruby">    @tr = @se.transactions</code>
         </li>
@@ -226,8 +266,8 @@
           <code class="ruby">  def test_invoice_repo_class_exists</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="22">
-          
+        <li class="covered" data-hits="1" data-linenumber="22">
+          <span class="hits">1</span>
           
           <code class="ruby">    assert_equal TransactionRepo, tr.class</code>
         </li>
@@ -250,8 +290,8 @@
           <code class="ruby">  def test_can_find_all</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="26">
-          
+        <li class="covered" data-hits="1" data-linenumber="26">
+          <span class="hits">1</span>
           
           <code class="ruby">    assert_equal 4985, tr.all.count</code>
         </li>
@@ -274,8 +314,8 @@
           <code class="ruby">  def test_can_count_all_transactions</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="30">
-          
+        <li class="covered" data-hits="1" data-linenumber="30">
+          <span class="hits">1</span>
           
           <code class="ruby">    assert_equal 4985, tr.transaction_count</code>
         </li>
@@ -298,8 +338,8 @@
           <code class="ruby">  def test_can_find_by_id</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="34">
-          
+        <li class="covered" data-hits="1" data-linenumber="34">
+          <span class="hits">1</span>
           
           <code class="ruby">    assert_equal 3715, tr.find_by_id(5).invoice_id</code>
         </li>
@@ -322,8 +362,8 @@
           <code class="ruby">  def test_finds_nil_with_bad_id</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="38">
-          
+        <li class="covered" data-hits="1" data-linenumber="38">
+          <span class="hits">1</span>
           
           <code class="ruby">    assert_nil tr.find_by_id(8347)</code>
         </li>
@@ -346,8 +386,8 @@
           <code class="ruby">  def test_can_find_all_by_invoice_id</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="42">
-          
+        <li class="covered" data-hits="1" data-linenumber="42">
+          <span class="hits">1</span>
           
           <code class="ruby">    assert_equal 2, tr.find_all_by_invoice_id(750).count</code>
         </li>
@@ -394,8 +434,8 @@
           <code class="ruby">  def test_can_find_all_by_credit_card_number</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="50">
-          
+        <li class="covered" data-hits="1" data-linenumber="50">
+          <span class="hits">1</span>
           
           <code class="ruby">    assert_equal 1, tr.find_all_by_credit_card_number(4113758460176252).count</code>
         </li>
@@ -418,8 +458,8 @@
           <code class="ruby">  def test_finds_empty_array_for_bad_credit_card_number</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="54">
-          
+        <li class="covered" data-hits="1" data-linenumber="54">
+          <span class="hits">1</span>
           
           <code class="ruby">    assert_equal [], tr.find_all_by_credit_card_number(384757575)</code>
         </li>
@@ -442,8 +482,8 @@
           <code class="ruby">  def test_find_all_by_result</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="58">
-          
+        <li class="covered" data-hits="1" data-linenumber="58">
+          <span class="hits">1</span>
           
           <code class="ruby">    assert_equal 4158, tr.find_all_by_result(&quot;success&quot;).count</code>
         </li>
@@ -466,8 +506,8 @@
           <code class="ruby">  def test_finds_empty_array_for_bad_invoice_id</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="62">
-          
+        <li class="covered" data-hits="1" data-linenumber="62">
+          <span class="hits">1</span>
           
           <code class="ruby">    assert_equal [], tr.find_all_by_result(&quot;&quot;)</code>
         </li>
@@ -503,11 +543,11 @@
         <div class="source_table" id="95ef81f5ac11761468b53116dc52db39fb758a15">
   <div class="header">
     <h3>test/transaction_test.rb</h3>
-    <h4><span class="red">58.62 %</span> covered</h4>
+    <h4><span class="green">100.0 %</span> covered</h4>
     <div>
       <b>29</b> relevant lines. 
-      <span class="green"><b>17</b> lines covered</span> and
-      <span class="red"><b>12</b> lines missed.</span>
+      <span class="green"><b>29</b> lines covered</span> and
+      <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
   
@@ -568,8 +608,8 @@
           <code class="ruby">  def setup</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="10">
-          
+        <li class="covered" data-hits="9" data-linenumber="10">
+          <span class="hits">9</span>
           
           <code class="ruby">    @se = SalesEngine.from_csv({</code>
         </li>
@@ -616,8 +656,8 @@
           <code class="ruby">      })</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="18">
-          
+        <li class="covered" data-hits="9" data-linenumber="18">
+          <span class="hits">9</span>
           
           <code class="ruby">    @t = Transaction.new({</code>
         </li>
@@ -688,8 +728,8 @@
           <code class="ruby">  def test_transaction_exists</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="30">
-          
+        <li class="covered" data-hits="1" data-linenumber="30">
+          <span class="hits">1</span>
           
           <code class="ruby">    assert Transaction, t.class</code>
         </li>
@@ -712,8 +752,8 @@
           <code class="ruby">  def test_id</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="34">
-          
+        <li class="covered" data-hits="1" data-linenumber="34">
+          <span class="hits">1</span>
           
           <code class="ruby">    assert_equal 6, t.id</code>
         </li>
@@ -736,8 +776,8 @@
           <code class="ruby">  def test_invoice_id</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="38">
-          
+        <li class="covered" data-hits="1" data-linenumber="38">
+          <span class="hits">1</span>
           
           <code class="ruby">    assert_equal 8, t.invoice_id</code>
         </li>
@@ -760,8 +800,8 @@
           <code class="ruby">  def test_credit_card_number</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="42">
-          
+        <li class="covered" data-hits="1" data-linenumber="42">
+          <span class="hits">1</span>
           
           <code class="ruby">    assert_equal &quot;4242424242424242&quot;, t.credit_card_number</code>
         </li>
@@ -784,8 +824,8 @@
           <code class="ruby">  def test_credit_card_expiration</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="46">
-          
+        <li class="covered" data-hits="1" data-linenumber="46">
+          <span class="hits">1</span>
           
           <code class="ruby">    assert_equal &quot;0220&quot;, t.credit_card_expiration_date</code>
         </li>
@@ -808,8 +848,8 @@
           <code class="ruby">  def test_result</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="50">
-          
+        <li class="covered" data-hits="1" data-linenumber="50">
+          <span class="hits">1</span>
           
           <code class="ruby">    assert_equal &quot;success&quot;, t.result</code>
         </li>
@@ -826,8 +866,8 @@
           <code class="ruby">  def test_created_at</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="53">
-          
+        <li class="covered" data-hits="1" data-linenumber="53">
+          <span class="hits">1</span>
           
           <code class="ruby">    assert Time.now, t.created_at</code>
         </li>
@@ -850,8 +890,8 @@
           <code class="ruby">  def test_updated_at</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="57">
-          
+        <li class="covered" data-hits="1" data-linenumber="57">
+          <span class="hits">1</span>
           
           <code class="ruby">    assert Time.now, t.updated_at</code>
         </li>
@@ -874,14 +914,14 @@
           <code class="ruby">  def test_can_find_invoices_by_transactions</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="61">
-          
+        <li class="covered" data-hits="1" data-linenumber="61">
+          <span class="hits">1</span>
           
           <code class="ruby">    transaction = se.transactions.find_by_id(40)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="62">
-          
+        <li class="covered" data-hits="1" data-linenumber="62">
+          <span class="hits">1</span>
           
           <code class="ruby">    assert_equal 14, transaction.invoice.id</code>
         </li>
